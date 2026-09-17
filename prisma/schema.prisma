@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Booking {
+  id                String        @id @default(cuid())
+  bookingNumber     String        @unique // e.g., MNI-2026-1001
+  customerName      String
+  customerPhone     String
+  customerEmail     String?
+  boatType          BoatType      // CANOE, SHIKARA, KAYAK
+  experienceTitle   String        // e.g., "Sunrise 2.5h Canal Tour"
+  date              DateTime
+  timeWindow        TimeWindow    // SUNRISE, MORNING, AFTERNOON, SUNSET
+  adultsCount       Int
+  childrenCount     Int           @default(0)
+  totalAmount       Float
+  tokenAdvance      Float         // 25% paid upfront
+  jettyBalance      Float         // 75% settled on arrival
+  paymentStatus     PaymentStatus @default(PENDING) // PENDING, PAID, REFUNDED
+  status            BookingStatus @default(RECEIVED)// RECEIVED, ASSIGNED, COMPLETED, CANCELLED
+  razorpayOrderId   String?
+  razorpayPaymentId String?
+  assignedBoatman   String?       // Operator name & phone for dispatch
+  notes             String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([date])
+  @@index([status])
+  @@index([bookingNumber])
+}
+
+model Lead {
+  id              String      @id @default(cuid())
+  boatType        BoatType
+  experienceTitle String?
+  date            DateTime?
+  timeWindow      TimeWindow?
+  adultsCount     Int?
+  estimatedAmount Float?
+  source          String      @default("whatsapp_click") // whatsapp_click, phone_call, form_inquiry
+  createdAt       DateTime    @default(now())
+}
+
+enum BoatType {
+  CANOE
+  SHIKARA
+  KAYAK
+}
+
+enum TimeWindow {
+  SUNRISE
+  MORNING
+  AFTERNOON
+  SUNSET
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  REFUNDED
+}
+
+enum BookingStatus {
+  RECEIVED
+  ASSIGNED
+  COMPLETED
+  CANCELLED
+}
