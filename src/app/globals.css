@@ -46,6 +46,14 @@
     border-color: #D1D5DB;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 .material-symbols-outlined {
