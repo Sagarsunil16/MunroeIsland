@@ -3,7 +3,7 @@ import { Logo } from '@/shared/components/ui/Logo';
 import { ShieldCheck, MessageSquare, MapPin } from 'lucide-react';
 
 export function Footer() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919995685136";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
 
   return (
     <footer className="bg-black text-white border-t border-neutral-800 pt-20 pb-14 font-sans">

@@ -6,7 +6,7 @@ import { Compass, Menu, X, Phone, MessageSquare } from "lucide-react";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919995685136";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
 
   return (
     <header className="sticky top-0 z-50 bg-nature-forest text-nature-sand shadow-md">

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { EXPERIENCES, calculateQuote } from "@/lib/pricing";
 import { saveBooking } from "@/lib/bookings-store";
+import { BoatType, TimeWindow } from "@/types";
 
 export async function POST(request: Request) {
   try {
@@ -32,25 +33,41 @@ export async function POST(request: Request) {
     const dateFormatted = date.replace(/-/g, "");
     const bookingNumber = `MNI-${dateFormatted}-${randomSuffix}`;
 
-    // 1. Save to persistent file storage (works locally & immediately)
-    saveBooking({
-      id: bookingNumber,
-      bookingNumber,
-      customerName,
-      customerPhone,
-      customerEmail: customerEmail || undefined,
-      boatType: exp.boatType,
-      experienceTitle: exp.title,
-      date,
-      timeWindow,
-      adultsCount: quote.adultsCount,
-      totalAmount: quote.totalAmount,
-      tokenAdvance: quote.tokenAdvance,
-      jettyBalance: quote.jettyBalance,
-      status: "RECEIVED",
-      notes: notes || undefined,
-      createdAt: new Date().toISOString(),
-    });
+    const upperWindow = (timeWindow || "").toUpperCase();
+    const normalizedWindow: TimeWindow =
+      upperWindow === "MORNING" || upperWindow === "AFTERNOON" || upperWindow === "SUNSET"
+        ? (upperWindow as TimeWindow)
+        : "SUNRISE";
+
+    const upperBoat = (exp.boatType || "").toUpperCase();
+    const normalizedBoatType: BoatType =
+      upperBoat === "SHIKARA" || upperBoat === "KAYAK"
+        ? (upperBoat as BoatType)
+        : "CANOE";
+
+    // 1. Save to persistent / in-memory store
+    try {
+      saveBooking({
+        id: bookingNumber,
+        bookingNumber,
+        customerName,
+        customerPhone,
+        customerEmail: customerEmail || undefined,
+        boatType: normalizedBoatType,
+        experienceTitle: exp.title,
+        date,
+        timeWindow: normalizedWindow,
+        adultsCount: quote.adultsCount,
+        totalAmount: quote.totalAmount,
+        tokenAdvance: quote.tokenAdvance,
+        jettyBalance: quote.jettyBalance,
+        status: "RECEIVED",
+        notes: notes || undefined,
+        createdAt: new Date().toISOString(),
+      });
+    } catch (saveErr) {
+      console.warn("Local storage write skipped:", saveErr);
+    }
 
     try {
       await prisma.booking.create({
@@ -59,10 +76,10 @@ export async function POST(request: Request) {
           customerName,
           customerPhone,
           customerEmail: customerEmail || null,
-          boatType: exp.boatType,
+          boatType: normalizedBoatType,
           experienceTitle: exp.title,
           date: new Date(date),
-          timeWindow,
+          timeWindow: normalizedWindow,
           adultsCount: quote.adultsCount,
           totalAmount: quote.totalAmount,
           tokenAdvance: quote.tokenAdvance,
@@ -73,7 +90,7 @@ export async function POST(request: Request) {
         },
       });
     } catch (dbError) {
-      // If DATABASE_URL is not yet connected to live cloud Neon Postgres, log warning and proceed gracefully
+      // If DATABASE_URL is connecting or in cold start, log warning and proceed gracefully
       console.warn("Database save skipped (configure live DATABASE_URL in .env):", dbError);
     }
 

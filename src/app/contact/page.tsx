@@ -14,7 +14,7 @@ if (typeof window !== 'undefined') {
 export default function ContactPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const whatsappBtnRef = useRef<HTMLAnchorElement>(null);
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919995685136";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
 
   useEffect(() => {
     let btnCleanup: (() => void) | undefined;

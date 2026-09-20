@@ -5,7 +5,7 @@ import { ArrowRight, ShieldCheck, Sparkles, CheckCircle2, Waves, MessageSquare }
 import { HeroBookingCapsule } from "@/components/boating/HeroBookingCapsule";
 
 export function AsanaHero() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919995685136";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
 
   return (
     <section className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">

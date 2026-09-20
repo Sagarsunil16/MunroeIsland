@@ -22,7 +22,9 @@ export interface StoredBooking {
   createdAt: string;
 }
 
-const DATA_DIR = path.join(process.cwd(), 'data');
+// Check for Vercel / serverless environment (where cwd is read-only)
+const isServerless = process.env.VERCEL === '1' || Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME);
+const DATA_DIR = isServerless ? '/tmp' : path.join(process.cwd(), 'data');
 const DATA_FILE = path.join(DATA_DIR, 'bookings.json');
 
 const INITIAL_SEED: StoredBooking[] = [
@@ -63,47 +65,77 @@ const INITIAL_SEED: StoredBooking[] = [
   },
 ];
 
+// In-memory fallback ensuring operations succeed even if disk writes are restricted
+const memoryStore: Map<string, StoredBooking> = new Map(
+  INITIAL_SEED.map((b) => [b.bookingNumber, b])
+);
+
 function ensureFileExists() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-  if (!fs.existsSync(DATA_FILE)) {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(INITIAL_SEED, null, 2), 'utf-8');
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    if (!fs.existsSync(DATA_FILE)) {
+      fs.writeFileSync(DATA_FILE, JSON.stringify(INITIAL_SEED, null, 2), 'utf-8');
+    }
+  } catch (err) {
+    // Graceful fallback on read-only environments
+    console.warn("Storage directory init skipped (read-only filesystem):", err);
   }
 }
 
 export function getAllBookings(): StoredBooking[] {
   try {
     ensureFileExists();
-    const content = fs.readFileSync(DATA_FILE, 'utf-8');
-    return JSON.parse(content) as StoredBooking[];
+    if (fs.existsSync(DATA_FILE)) {
+      const content = fs.readFileSync(DATA_FILE, 'utf-8');
+      const parsed = JSON.parse(content) as StoredBooking[];
+      // Sync memory cache
+      for (const item of parsed) {
+        memoryStore.set(item.bookingNumber, item);
+      }
+      return parsed;
+    }
   } catch (error) {
-    console.error('Error reading bookings file:', error);
-    return INITIAL_SEED;
+    console.warn('Reading bookings file skipped, using memory store:', error);
   }
+  return Array.from(memoryStore.values());
 }
 
 export function saveBooking(booking: StoredBooking): StoredBooking {
-  ensureFileExists();
-  const all = getAllBookings();
-  const index = all.findIndex((b) => b.id === booking.id || b.bookingNumber === booking.bookingNumber);
-  if (index >= 0) {
-    all[index] = booking;
-  } else {
-    all.unshift(booking);
+  // Always write to in-memory store
+  memoryStore.set(booking.bookingNumber, booking);
+
+  try {
+    ensureFileExists();
+    const all = getAllBookings();
+    const index = all.findIndex((b) => b.id === booking.id || b.bookingNumber === booking.bookingNumber);
+    if (index >= 0) {
+      all[index] = booking;
+    } else {
+      all.unshift(booking);
+    }
+    fs.writeFileSync(DATA_FILE, JSON.stringify(all, null, 2), 'utf-8');
+  } catch (err) {
+    console.warn("File persist skipped (memory store preserved):", err);
   }
-  fs.writeFileSync(DATA_FILE, JSON.stringify(all, null, 2), 'utf-8');
+
   return booking;
 }
 
 export function getBookingByNumber(bookingNumber: string): StoredBooking | null {
-  ensureFileExists();
-  const all = getAllBookings();
-  return all.find((b) => b.bookingNumber === bookingNumber || b.id === bookingNumber) || null;
+  const fromMem = memoryStore.get(bookingNumber);
+  if (fromMem) return fromMem;
+
+  try {
+    const all = getAllBookings();
+    return all.find((b) => b.bookingNumber === bookingNumber || b.id === bookingNumber) || null;
+  } catch {
+    return null;
+  }
 }
 
 export function updateBookingStatus(id: string, status: StoredBooking['status'], assignedBoatman?: string): StoredBooking | null {
-  ensureFileExists();
   const all = getAllBookings();
   const booking = all.find((b) => b.id === id || b.bookingNumber === id);
   if (!booking) return null;
@@ -112,17 +144,31 @@ export function updateBookingStatus(id: string, status: StoredBooking['status'],
   if (assignedBoatman !== undefined) {
     booking.assignedBoatman = assignedBoatman;
   }
-  fs.writeFileSync(DATA_FILE, JSON.stringify(all, null, 2), 'utf-8');
+
+  memoryStore.set(booking.bookingNumber, booking);
+
+  try {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(all, null, 2), 'utf-8');
+  } catch (err) {
+    console.warn("Update persist skipped:", err);
+  }
+
   return booking;
 }
 
 export function updateBookingPayment(bookingNumber: string, paymentId: string): StoredBooking | null {
-  ensureFileExists();
   const all = getAllBookings();
   const booking = all.find((b) => b.bookingNumber === bookingNumber || b.id === bookingNumber);
   if (!booking) return null;
 
   booking.paymentId = paymentId;
-  fs.writeFileSync(DATA_FILE, JSON.stringify(all, null, 2), 'utf-8');
+  memoryStore.set(booking.bookingNumber, booking);
+
+  try {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(all, null, 2), 'utf-8');
+  } catch (err) {
+    console.warn("Payment persist skipped:", err);
+  }
+
   return booking;
 }

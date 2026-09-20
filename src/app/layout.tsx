@@ -59,7 +59,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919995685136";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
 
   return (
     <html lang="en" className={`${plusJakartaSans.variable} ${playfairDisplay.variable}`}>

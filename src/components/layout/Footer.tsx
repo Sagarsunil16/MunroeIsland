@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Compass, ShieldCheck, LifeBuoy, MapPin, Phone, MessageSquare } from "lucide-react";
 
 export function Footer() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919995685136";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
 
   return (
     <footer className="bg-nature-forest text-nature-sand border-t border-nature-lagoon mt-20">
