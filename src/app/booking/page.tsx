@@ -156,6 +156,12 @@ function BookingFormContent() {
               email: customerEmail,
             },
             theme: { color: '#000000' },
+            method: {
+              upi: true,
+              card: true,
+              netbanking: true,
+              wallet: true,
+            },
             handler: async function (response: {
               razorpay_payment_id?: string;
               razorpay_order_id?: string;
