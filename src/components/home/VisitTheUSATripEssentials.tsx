@@ -31,10 +31,10 @@ const ESSENTIALS = [
   },
   {
     icon: CreditCard,
-    title: 'Transparent 25% Token',
+    title: 'Transparent Token Advance',
     eyebrow: 'PRICING & REASSURANCE',
     description:
-      'No surprise tout commissions. Pay only a 25% token advance online to lock your slot, and settle the rest directly with your boatman.',
+      'No surprise tout commissions. Pay only an upfront token advance online to lock your slot, and settle the rest directly with your boatman.',
     actionText: 'How Booking Works',
     actionHref: '/booking',
   },

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Clock, Play, Pause, ChevronRight, ChevronLeft, ArrowRight, Compass, Sparkles } from 'lucide-react';
+import { Clock, Play, Pause, ChevronRight, ChevronLeft, ArrowRight, Sparkles } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -36,7 +36,7 @@ const CHAPTERS: Chapter[] = [
       'As dawn breaks over Munroe Island, a thin veil of river fog rolls across the Ashtamudi estuary. Kingfishers dive from coconut fronds, and white egrets stand sentinel on submerged mudbanks. In a hand-paddled wooden canoe, the backwaters belong entirely to you.',
     atmosphere: 'Silent bamboo push • Distant temple bells • Kingfisher calls',
     metrics: '0 dB Motor Noise • 5:45 AM First Departure',
-    image: '/images/munroe island.jpg',
+    image: '/images/canoe.jpeg',
   },
   {
     id: 'mangroves',
@@ -49,7 +49,7 @@ const CHAPTERS: Chapter[] = [
       'Venturing deeper into the archipelago, the waterway narrows to barely three meters wide. Knotted stilt roots of mangrove trees interlock overhead, creating natural green tunnels. The temperature drops four degrees beneath the emerald shade as your captain gently maneuvers through.',
     atmosphere: 'Cool mangrove breeze • Dappled sunbeams • Water lily carpets',
     metrics: '2.2m Canal Width • Exclusive Canoe Access',
-    image: '/images/mangroove.jpg',
+    image: '/images/mangroove2.jpg',
   },
   {
     id: 'village',
@@ -62,7 +62,7 @@ const CHAPTERS: Chapter[] = [
       'Munroe is not a resort — it is eight living, breathing islands connected by footbridges and ferry boats. Watch coir spinning wheels turn in backyard compounds, smell fresh cardamom and fish curries wafting from tile-roofed homesteads, and wave to children bicycling home along the levee paths.',
     atmosphere: 'Whirring wooden coir wheels • Duck flotillas • Coconut husk aroma',
     metrics: '8 Interconnected Islands • 4 Generations of Craft',
-    image: '/images/munroe island2.jpg',
+    image: '/images/canoe-2.jpeg',
   },
   {
     id: 'sunset',
@@ -75,7 +75,7 @@ const CHAPTERS: Chapter[] = [
       'The journey culminates where the Kallada River spills into the expansive waters of Lake Ashtamudi. Chinese fishing nets stand in stark silhouette against a fiery sky. The evening breeze picks up from the Arabian Sea, cooling the timber hull as your boatman docks back at the jetty.',
     atmosphere: 'Golden lake reflections • Silhouetted fishing nets • Cool evening breeze',
     metrics: '180° Lake Panorama • 6:30 PM Jetty Return',
-    image: '/images/kayaking1.jpg',
+    image: '/images/shikkara-boating.jpeg',
   },
 ];
 

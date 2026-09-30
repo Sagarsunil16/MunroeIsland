@@ -4,13 +4,13 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Munroe Island Boating Charges, Timings & Canoe Tour Booking',
   description:
-    'Compare Munroe Island boating charges starting from ₹1,300 for private canoe rides and ₹2,000 for covered shikaras. Check sunrise timings and reserve with a 25% token.',
+    'Compare Munroe Island boating charges starting from ₹800 for canoe tours and ₹1,200 for covered shikaras. Check sunrise timings and reserve with an upfront token.',
 };
 
 const boatingFaqs = [
   {
     q: 'What are Munroe Island boating charges?',
-    a: 'Traditional wooden canoes start at ₹1,300 for a 2-hour private village tour (for 2 pax) and ₹1,600 for the signature 2.5-hour sunrise tour. Extra passengers are ₹250–₹300 each. Shaded shikara boats start from ₹2,000 for families (up to 4 pax).',
+    a: 'Traditional wooden canoes start at ₹800 for 1 hour and ₹1,200 for 2 hours (up to 6 pax for the entire boat). Shaded shikara cruises start from ₹1,200 for 1 hour and ₹2,000 for 2 hours.',
   },
   {
     q: 'What are the daily boating timings in Munroe Island?',

@@ -133,7 +133,7 @@ export function GuidesViewClient({ guides }: GuidesViewClientProps) {
               Ready to embark on the morning canals?
             </h3>
             <p className="text-xs sm:text-sm text-neutral-400 font-normal leading-relaxed">
-              Lock in your sunrise wooden canoe or covered shikara with a simple 25% token.
+              Lock in your sunrise wooden canoe or covered shikara with a simple token advance.
             </p>
           </div>
 

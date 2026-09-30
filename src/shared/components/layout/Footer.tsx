@@ -13,7 +13,7 @@ export function Footer() {
           <div className="col-span-2 space-y-5">
             <Logo inverted={true} />
             <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-sm font-normal">
-              The official destination travel platform for Munroe Island (Munroethuruthu), Kerala. Direct native captain assignments, standardized jetty pricing, and 25% online token reservations.
+              The official destination travel platform for Munroe Island (Munroethuruthu), Kerala. Direct native captain assignments, standardized jetty pricing, and upfront online token reservations.
             </p>
             <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 pt-1">
               <ShieldCheck className="h-4 w-4" />
@@ -87,14 +87,22 @@ export function Footer() {
           {/* Col 4: Dispatch & Helpdesk */}
           <div>
             <h4 className="text-xs font-black uppercase tracking-[0.2em] text-white mb-5">
-              Jetty Helpdesk
+              Boarding & Helpdesk
             </h4>
             <ul className="space-y-3 text-xs text-neutral-400 font-medium">
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-neutral-500 shrink-0 mt-0.5" />
-                <span>Munroe Island Boat Jetty, Kollam, Kerala 691502</span>
+                <span>Munroe Island, Kollam (Pier pin shared on WhatsApp)</span>
               </li>
               <li className="pt-2">
+                <Link
+                  href="/booking/lookup"
+                  className="inline-flex items-center gap-1.5 text-amber-300 hover:text-white font-bold transition-colors"
+                >
+                  <span>Check Booking Status →</span>
+                </Link>
+              </li>
+              <li>
                 <a
                   href={`https://wa.me/${whatsappNumber}`}
                   target="_blank"
@@ -112,15 +120,24 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Strip (VisitTheUSA Legal & Trademark Style) */}
-        <div className="pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
-          <p>© {new Date().getFullYear()} Visit Munroe Island. All rights reserved.</p>
-          <div className="flex items-center gap-6 text-[11px] uppercase tracking-wider font-bold">
-            <Link href="/booking" className="hover:text-white transition-colors">
-              Token Booking Terms
+        {/* Bottom Strip (Mandatory Payment Gateway & Legal Compliance Links) */}
+        <div className="pt-8 border-t border-neutral-900 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+          <p>© {new Date().getFullYear()} Munroe Island Expeditions. All rights reserved. Technology Facilitator.</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-wider font-bold">
+            <Link href="/terms" className="hover:text-amber-300 transition-colors">
+              Terms of Service
+            </Link>
+            <Link href="/privacy" className="hover:text-amber-300 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/refund-policy" className="hover:text-amber-300 transition-colors">
+              Refund Policy
+            </Link>
+            <Link href="/booking/lookup" className="hover:text-white transition-colors">
+              Find My Booking
             </Link>
             <Link href="/contact" className="hover:text-white transition-colors">
-              Jetty Directions
+              Contact Desk
             </Link>
           </div>
         </div>

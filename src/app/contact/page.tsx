@@ -7,6 +7,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MessageSquare, Clock, MapPin, Train, Car, Navigation, ShieldCheck, ArrowRight, Compass } from 'lucide-react';
 
+import { ContactForm } from '@/components/contact/ContactForm';
+
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -124,22 +126,27 @@ export default function ContactPage() {
     <div ref={containerRef} className="pt-32 pb-24 sm:pt-40 sm:pb-32 bg-white min-h-screen text-black overflow-x-clip">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header (VisitTheUSA Typography with GSAP Classes) */}
-        <div className="max-w-3xl mb-16 sm:mb-20">
+        <div className="max-w-3xl mb-14 sm:mb-16">
           <span className="gsap-contact-eyebrow text-[11px] font-black uppercase tracking-[0.25em] text-neutral-500 block mb-3">
             DIRECT JETTY DISPATCH & SUPPORT
           </span>
           <h1 className="gsap-contact-headline text-4xl sm:text-6xl lg:text-7xl font-sans font-black text-black tracking-[-0.03em] leading-[0.98]">
-            Jetty Location & Contact
+            Get in Touch
           </h1>
           <p className="gsap-contact-sub mt-5 text-base sm:text-xl text-neutral-600 leading-relaxed font-normal">
-            Have questions regarding tidal water levels, 5:45 AM sunrise departures, or train connections? Our native team is available daily on WhatsApp and phone.
+            Have questions regarding tidal water levels, 5:45 AM sunrise departures, or train connections? Send us a message or chat directly with our native dispatch desk.
           </p>
         </div>
 
-        {/* 2-Column High-Contrast Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-20">
-          {/* Left: Dispatch Helpdesk Card */}
-          <div className="gsap-contact-card rounded-3xl bg-neutral-50 border border-neutral-200/90 p-8 sm:p-12 shadow-xs flex flex-col justify-between space-y-8 hover:border-black hover:shadow-xl transition-all duration-500">
+        {/* Top 2-Column Grid: Form + Helpdesk */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+          {/* Left: Contact Form (7 cols) */}
+          <div className="gsap-contact-card lg:col-span-7">
+            <ContactForm />
+          </div>
+
+          {/* Right: Dispatch Helpdesk Card (5 cols) */}
+          <div className="gsap-contact-card lg:col-span-5 rounded-3xl bg-neutral-50 border border-neutral-200/90 p-8 sm:p-10 shadow-xs flex flex-col justify-between space-y-8 hover:border-black hover:shadow-xl transition-all duration-500">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
@@ -147,69 +154,69 @@ export default function ContactPage() {
                   ON-DUTY JETTY DESK
                 </span>
               </div>
-              <h2 className="text-3xl font-black text-black tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl font-black text-black tracking-tight mb-3">
                 Native Boatman Dispatch
               </h2>
-              <p className="text-sm text-neutral-600 leading-relaxed font-normal mb-8">
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal mb-6">
                 All boats depart from authorized local village jetties. Our dispatch connects your reservation directly to your assigned captain.
               </p>
 
-              <div className="space-y-6 text-sm">
+              <div className="space-y-4 text-sm">
                 {/* WhatsApp */}
-                <div className="gsap-inner-item flex items-start gap-4 p-5 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors">
-                  <div className="w-12 h-12 rounded-2xl bg-black text-white flex items-center justify-center shrink-0">
-                    <MessageSquare className="w-5 h-5 text-emerald-400" />
+                <div className="gsap-inner-item flex items-start gap-4 p-4 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-black text-white flex items-center justify-center shrink-0">
+                    <MessageSquare className="w-4 h-4 text-emerald-400" />
                   </div>
                   <div>
-                    <span className="text-xs font-black uppercase tracking-wider text-black block">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-neutral-500 block">
                       WhatsApp Dispatch (Fastest)
                     </span>
                     <a
                       href={`https://wa.me/${whatsappNumber}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-base font-black text-black hover:underline"
+                      className="text-sm font-black text-black hover:underline"
                     >
                       +{whatsappNumber}
                     </a>
-                    <span className="block text-xs text-neutral-500 mt-1">
+                    <span className="block text-[11px] text-neutral-500 mt-0.5">
                       Direct boatman assignment & Google Maps pin sent immediately.
                     </span>
                   </div>
                 </div>
 
                 {/* Operating Hours */}
-                <div className="gsap-inner-item flex items-start gap-4 p-5 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors">
-                  <div className="w-12 h-12 rounded-2xl bg-black text-white flex items-center justify-center shrink-0">
-                    <Clock className="w-5 h-5 text-amber-400" />
+                <div className="gsap-inner-item flex items-start gap-4 p-4 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-black text-white flex items-center justify-center shrink-0">
+                    <Clock className="w-4 h-4 text-amber-400" />
                   </div>
                   <div>
-                    <span className="text-xs font-black uppercase tracking-wider text-black block">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-neutral-500 block">
                       Operating Hours
                     </span>
                     <span className="text-sm font-bold text-black block">
                       5:00 AM – 9:00 PM IST (Daily)
                     </span>
-                    <span className="block text-xs text-neutral-500 mt-1">
+                    <span className="block text-[11px] text-neutral-500 mt-0.5">
                       Early dispatch is active at 5:15 AM to coordinate sunrise departures.
                     </span>
                   </div>
                 </div>
 
-                {/* Boarding Jetty */}
-                <div className="gsap-inner-item flex items-start gap-4 p-5 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors">
-                  <div className="w-12 h-12 rounded-2xl bg-black text-white flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-white" />
+                {/* Boarding Jetty & Location */}
+                <div className="gsap-inner-item flex items-start gap-4 p-4 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-black text-white flex items-center justify-center shrink-0">
+                    <MapPin className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <span className="text-xs font-black uppercase tracking-wider text-black block">
-                      Primary Boarding Jetty
+                    <span className="text-[10px] font-black uppercase tracking-wider text-neutral-500 block">
+                      Boarding Point & Directions
                     </span>
                     <span className="text-sm font-bold text-black block">
-                      Munroe Island Boat Jetty, Peringalam
+                      Assigned Pier / Shared on WhatsApp
                     </span>
-                    <span className="block text-xs text-neutral-500 mt-1">
-                      Munroethuruthu P.O., Kollam District, Kerala 691502
+                    <span className="block text-[11px] text-neutral-500 mt-0.5">
+                      We coordinate with local boat captains across Munroe Island. The exact boarding pier and live Google Maps pin are shared directly with you on WhatsApp upon booking confirmation.
                     </span>
                   </div>
                 </div>
@@ -231,70 +238,84 @@ export default function ContactPage() {
               </a>
             </div>
           </div>
+        </div>
 
-          {/* Right: Transit Guide & Getting Here */}
-          <div className="gsap-contact-card rounded-3xl bg-neutral-50 border border-neutral-200/90 p-8 sm:p-12 shadow-xs flex flex-col justify-between space-y-8 hover:border-black hover:shadow-xl transition-all duration-500">
+        {/* Transit Logistics & Getting Here Showcase */}
+        <div className="mb-20">
+          <div className="gsap-contact-card rounded-3xl bg-neutral-50 border border-neutral-200/90 p-8 sm:p-12 shadow-xs space-y-8 hover:border-black hover:shadow-xl transition-all duration-500">
             <div>
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 block mb-2">
                 TRANSIT LOGISTICS
               </span>
-              <h2 className="text-3xl font-black text-black tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-4xl font-black text-black tracking-tight mb-3">
                 Reaching the Archipelago
               </h2>
-              <p className="text-sm text-neutral-600 leading-relaxed font-normal mb-8">
-                Munroe Island is easily accessible by rail and road, located at the scenic confluence of Ashtamudi Lake and the Kallada River.
+              <p className="text-sm text-neutral-600 leading-relaxed font-normal max-w-2xl">
+                Munroe Island is easily accessible by rail and road, located at the scenic confluence of Ashtamudi Lake and the Kallada River in Kollam District.
               </p>
+            </div>
 
-              <div className="space-y-4 text-xs sm:text-sm">
-                {/* Train */}
-                <div className="gsap-inner-item p-5 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors">
-                  <div className="flex items-center gap-2.5 mb-2">
-                    <Train className="w-5 h-5 text-black" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+              {/* Train */}
+              <div className="gsap-inner-item p-6 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div className="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center">
+                      <Train className="w-4 h-4 text-emerald-400" />
+                    </div>
                     <strong className="text-sm font-black text-black uppercase tracking-wide">
-                      By Train (Recommended)
+                      By Train (Best)
                     </strong>
                   </div>
-                  <p className="text-neutral-600 leading-relaxed font-normal pl-7">
-                    Alight directly at <strong className="text-black font-bold">Munroturuttu (MQO)</strong> railway station. The main boat jetty is a short 5-minute auto-rickshaw ride (approx. ₹50–₹70). Local passenger trains connect directly from Kollam Junction (20 mins).
+                  <p className="text-neutral-600 leading-relaxed font-normal">
+                    Alight directly at <strong className="text-black font-bold">Munroturuttu (MQO)</strong> station. Your assigned boat boarding pier is a quick 5-minute auto ride (₹50–₹70). Direct passenger trains from Kollam (20 mins).
                   </p>
                 </div>
+              </div>
 
-                {/* From Kollam */}
-                <div className="gsap-inner-item p-5 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors">
-                  <div className="flex items-center gap-2.5 mb-2">
-                    <Car className="w-5 h-5 text-black" />
+              {/* From Kollam */}
+              <div className="gsap-inner-item p-6 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div className="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center">
+                      <Car className="w-4 h-4 text-amber-400" />
+                    </div>
                     <strong className="text-sm font-black text-black uppercase tracking-wide">
-                      By Road from Kollam (25 km)
+                      From Kollam (25 km)
                     </strong>
                   </div>
-                  <p className="text-neutral-600 leading-relaxed font-normal pl-7">
-                    Takes approx. 45–50 minutes via Kundara and Chittumala. Dedicated vehicle parking is available directly at the Peringalam boarding jetty.
+                  <p className="text-neutral-600 leading-relaxed font-normal">
+                    Takes approx. 45–50 minutes by car via Kundara and Chittumala. Dedicated vehicle parking is available directly at your assigned boarding pier.
                   </p>
                 </div>
+              </div>
 
-                {/* From Varkala */}
-                <div className="gsap-inner-item p-5 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors">
-                  <div className="flex items-center gap-2.5 mb-2">
-                    <Navigation className="w-5 h-5 text-black" />
+              {/* From Varkala */}
+              <div className="gsap-inner-item p-6 rounded-2xl bg-white border border-neutral-200/80 shadow-xs hover:border-neutral-300 transition-colors flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div className="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center">
+                      <Navigation className="w-4 h-4 text-sky-400" />
+                    </div>
                     <strong className="text-sm font-black text-black uppercase tracking-wide">
-                      Day Trip from Varkala (45 km)
+                      From Varkala (45 km)
                     </strong>
                   </div>
-                  <p className="text-neutral-600 leading-relaxed font-normal pl-7">
-                    Takes approx. 1 hour 20 minutes by private taxi. To comfortably catch the 5:45 AM sunrise canoe departure, depart Varkala Cliff by 4:30 AM.
+                  <p className="text-neutral-600 leading-relaxed font-normal">
+                    Takes 1 hour 20 minutes by private taxi. To comfortably catch the 5:45 AM sunrise canoe departure, depart Varkala Cliff by 4:30 AM.
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Link to full transit guide */}
-            <div className="pt-4 border-t border-neutral-200 flex items-center justify-between">
+            <div className="pt-4 border-t border-neutral-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <span className="text-xs text-neutral-500 font-medium">
-                Detailed schedules, trains & auto fares
+                Looking for detailed schedules, train timings & auto-rickshaw fare guides?
               </span>
               <Link
                 href="/guides/how-to-reach-munroe-island-kollam-varkala"
-                className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.18em] text-black hover:text-neutral-600 transition-colors group"
+                className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-[0.18em] text-black hover:text-neutral-600 transition-colors group shrink-0"
               >
                 <span>Read Full Transit Guide</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

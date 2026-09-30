@@ -21,7 +21,7 @@ const ROUTE_STOPS: RouteStop[] = [
   {
     id: 'jetty',
     time: '06:00 AM',
-    title: 'Peringalam Village Jetty',
+    title: 'Village Boarding Pier',
     subtitle: 'Departure & Cardamom Tea',
     description:
       'Step onto the quiet wooden jetty as morning mist hovers over the still water. Meet your native boatman, fit your life jacket, and sip freshly brewed spiced Kerala tea before departing.',
@@ -193,7 +193,7 @@ export function InteractiveCanalRoute() {
               </Link>
               <span className="text-xs text-neutral-500 flex items-center gap-1.5 font-medium">
                 <Shield className="w-4 h-4 text-emerald-600" />
-                25% token online • 75% at the jetty
+                Upfront token online • Settle balance at pier
               </span>
             </div>
           </div>

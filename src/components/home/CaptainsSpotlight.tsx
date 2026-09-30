@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
-import { ShieldCheck, Heart, Award } from 'lucide-react';
+import { ShieldCheck, Anchor } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -16,7 +15,7 @@ interface Captain {
   experienceYears: number;
   specialty: string;
   quote: string;
-  image: string;
+  initials: string;
   village: string;
 }
 
@@ -28,8 +27,8 @@ const CAPTAINS: Captain[] = [
     specialty: 'Sunrise Bird Watching & Mangrove Tunnels',
     quote:
       'I grew up poling canoes through these canals when there were no road bridges. I know every kingfisher tree and low-tide bend in the island.',
-    village: 'Peringalam, Munroe Island',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop',
+    village: 'Munroethuruthu West, Munroe Island',
+    initials: 'BC',
   },
   {
     name: 'Suresh Kumar',
@@ -39,7 +38,7 @@ const CAPTAINS: Captain[] = [
     quote:
       'Many grandparents and children visit us from across India. My priority is gentle, smooth waters, cool sunshade, and sharing our local village history.',
     village: 'Munroethuruthu East',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop',
+    initials: 'SK',
   },
   {
     name: 'Anandhu R.',
@@ -49,7 +48,7 @@ const CAPTAINS: Captain[] = [
     quote:
       'Kayaking lets you slip so quietly through the shallow canals that otters and herons carry on unbothered. It is pure meditation.',
     village: 'Kidapram, Munroe Island',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop',
+    initials: 'AR',
   },
 ];
 
@@ -103,14 +102,12 @@ export function CaptainsSpotlight() {
               className="gsap-captain-card rounded-3xl border border-neutral-200 bg-neutral-50 p-8 flex flex-col justify-between shadow-xs hover:shadow-xl hover:border-black transition-all duration-500 group"
             >
               <div>
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden mb-6 border-2 border-white shadow-md mx-auto sm:mx-0">
-                  <Image
-                    src={captain.image}
-                    alt={captain.name}
-                    fill
-                    className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
-                    sizes="112px"
-                  />
+                {/* Initials Avatar (no dummy photos) */}
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-black text-white flex items-center justify-center mb-6 mx-auto sm:mx-0 shadow-md group-hover:bg-neutral-800 transition-colors duration-300">
+                  <Anchor className="w-8 h-8 sm:w-10 sm:h-10 opacity-20 absolute" />
+                  <span className="text-2xl sm:text-3xl font-black tracking-tight relative z-10">
+                    {captain.initials}
+                  </span>
                 </div>
 
                 <div className="flex items-center gap-2 mb-2">
@@ -128,7 +125,7 @@ export function CaptainsSpotlight() {
                 </p>
 
                 <p className="text-sm text-neutral-600 italic leading-relaxed font-normal mb-6 border-l-2 border-black pl-3.5">
-                  "{captain.quote}"
+                  &quot;{captain.quote}&quot;
                 </p>
               </div>
 

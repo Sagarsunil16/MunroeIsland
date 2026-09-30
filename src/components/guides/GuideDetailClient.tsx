@@ -179,7 +179,7 @@ export function GuideDetailClient({ guide, whatsappNumber }: GuideDetailClientPr
               <div className="space-y-3 py-5 border-y border-neutral-200 text-xs text-neutral-800 font-semibold">
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>25% Token Advance to Confirm</span>
+                  <span>Token Advance to Confirm</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -187,7 +187,7 @@ export function GuideDetailClient({ guide, whatsappNumber }: GuideDetailClientPr
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Jetty Google Maps Pin on WhatsApp</span>
+                  <span>Boarding Pier Pin on WhatsApp</span>
                 </div>
               </div>
 
@@ -196,7 +196,7 @@ export function GuideDetailClient({ guide, whatsappNumber }: GuideDetailClientPr
                   href="/booking"
                   className="w-full flex items-center justify-center gap-2 rounded-full bg-black hover:bg-neutral-800 text-white font-black text-xs uppercase tracking-[0.18em] py-4 px-6 transition-all duration-300 shadow-md active:scale-98"
                 >
-                  <span>Book with 25% Token</span>
+                  <span>Book with Token Advance</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 

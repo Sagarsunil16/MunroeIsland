@@ -41,58 +41,9 @@ export async function POST(request: Request) {
 
     const upperBoat = (exp.boatType || "").toUpperCase();
     const normalizedBoatType: BoatType =
-      upperBoat === "SHIKARA" || upperBoat === "KAYAK"
+      upperBoat === "SHIKARA" || upperBoat === "KAYAK" || upperBoat === "SPEEDBOAT"
         ? (upperBoat as BoatType)
         : "CANOE";
-
-    // 1. Save to persistent / in-memory store
-    try {
-      saveBooking({
-        id: bookingNumber,
-        bookingNumber,
-        customerName,
-        customerPhone,
-        customerEmail: customerEmail || undefined,
-        boatType: normalizedBoatType,
-        experienceTitle: exp.title,
-        date,
-        timeWindow: normalizedWindow,
-        adultsCount: quote.adultsCount,
-        totalAmount: quote.totalAmount,
-        tokenAdvance: quote.tokenAdvance,
-        jettyBalance: quote.jettyBalance,
-        status: "RECEIVED",
-        notes: notes || undefined,
-        createdAt: new Date().toISOString(),
-      });
-    } catch (saveErr) {
-      console.warn("Local storage write skipped:", saveErr);
-    }
-
-    try {
-      await prisma.booking.create({
-        data: {
-          bookingNumber,
-          customerName,
-          customerPhone,
-          customerEmail: customerEmail || null,
-          boatType: normalizedBoatType,
-          experienceTitle: exp.title,
-          date: new Date(date),
-          timeWindow: normalizedWindow,
-          adultsCount: quote.adultsCount,
-          totalAmount: quote.totalAmount,
-          tokenAdvance: quote.tokenAdvance,
-          jettyBalance: quote.jettyBalance,
-          paymentStatus: "PENDING",
-          status: "RECEIVED",
-          notes: notes || null,
-        },
-      });
-    } catch (dbError) {
-      // If DATABASE_URL is connecting or in cold start, log warning and proceed gracefully
-      console.warn("Database save skipped (configure live DATABASE_URL in .env):", dbError);
-    }
 
     let razorpayOrderId: string | undefined = undefined;
     const razorpayKeyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;

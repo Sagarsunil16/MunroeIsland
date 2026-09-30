@@ -24,7 +24,7 @@ export function AsanaHero() {
 
       {/* Subtitle */}
       <p className="text-base sm:text-lg md:text-xl text-asana-muted max-w-2xl mx-auto leading-relaxed mb-8">
-        Discover Munroe Island&apos;s quietest mangrove canals with certified native boatmen. Transparent fares, 25% token reservations, and 100% life-jacket safety.
+        Discover Munroe Island&apos;s quietest mangrove canals with certified native boatmen. Transparent fares, upfront token reservations, and 100% life-jacket safety.
       </p>
 
       {/* Dual Asana CTAs */}
@@ -33,7 +33,7 @@ export function AsanaHero() {
           href="/booking"
           className="asana-button-primary inline-flex items-center gap-2 text-sm"
         >
-          <span>Book a Boat (25% Token)</span>
+          <span>Book a Boat (Token Advance)</span>
           <ArrowRight className="h-4 w-4" />
         </Link>
 
@@ -56,7 +56,7 @@ export function AsanaHero() {
         </div>
         <div className="flex items-center gap-1.5">
           <CheckCircle2 className="h-4 w-4 text-asana-coral" />
-          <span>Transparent 25% Token Lock</span>
+          <span>Transparent Token Lock</span>
         </div>
         <div className="flex items-center gap-1.5">
           <Waves className="h-4 w-4 text-asana-blue" />

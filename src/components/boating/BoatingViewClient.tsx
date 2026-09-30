@@ -1,25 +1,26 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { EXPERIENCES } from '@/lib/pricing';
+import { BOATING_MEDIA } from '@/lib/boating-media';
 import { formatINR } from '@/lib/utils';
 import { FaqAccordion } from '@/shared/components/animations/FaqAccordion';
-import { ArrowRight, Clock, Users, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Clock, Users, ShieldCheck, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const thumbnails = [
-  '/images/munroe island.jpg',
-  '/images/mangroove.jpg',
-  '/images/munroe island2.jpg',
-  '/images/kayaking1.jpg',
-  '/images/kayaking2.jpg',
+const CATEGORIES = [
+  { id: 'all', label: 'All Vessels' },
+  { id: 'canoe', label: 'Wooden Canoes' },
+  { id: 'shikara', label: 'Covered Shikaras' },
+  { id: 'kayak', label: 'Kayaking' },
+  { id: 'speedboat', label: 'Speed Boat' },
 ];
 
 interface BoatingViewClientProps {
@@ -28,6 +29,41 @@ interface BoatingViewClientProps {
 
 export function BoatingViewClient({ faqs }: BoatingViewClientProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeImageIndices, setActiveImageIndices] = useState<Record<string, number>>({});
+
+  const filteredExperiences = EXPERIENCES.filter((exp) => {
+    if (activeCategory === 'all') return true;
+    const media = BOATING_MEDIA[exp.id];
+    return media?.category === activeCategory;
+  });
+
+  const handleNextImage = (e: React.MouseEvent, expId: string, galleryLength: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setActiveImageIndices((prev) => ({
+      ...prev,
+      [expId]: ((prev[expId] || 0) + 1) % galleryLength,
+    }));
+  };
+
+  const handlePrevImage = (e: React.MouseEvent, expId: string, galleryLength: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setActiveImageIndices((prev) => ({
+      ...prev,
+      [expId]: ((prev[expId] || 0) - 1 + galleryLength) % galleryLength,
+    }));
+  };
+
+  const handleSelectDot = (e: React.MouseEvent, expId: string, dotIdx: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setActiveImageIndices((prev) => ({
+      ...prev,
+      [expId]: dotIdx,
+    }));
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -57,7 +93,7 @@ export function BoatingViewClient({ faqs }: BoatingViewClientProps) {
           scale: 1,
           filter: 'blur(0px)',
           duration: 0.8,
-          stagger: 0.1,
+          stagger: 0.08,
           ease: 'power2.out',
           delay: 0.2,
           clearProps: 'transform,opacity,filter',
@@ -105,8 +141,8 @@ export function BoatingViewClient({ faqs }: BoatingViewClientProps) {
   return (
     <div ref={containerRef} className="pt-28 pb-24 sm:pt-36 sm:pb-32 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header (VisitTheUSA Typography) */}
-        <div className="max-w-3xl mb-16 sm:mb-20">
+        {/* Header */}
+        <div className="max-w-3xl mb-12 sm:mb-16">
           <span className="gsap-boating-eyebrow text-[11px] font-black uppercase tracking-[0.25em] text-neutral-500 block mb-3">
             OFFICIAL FARES & SCHEDULES
           </span>
@@ -114,14 +150,48 @@ export function BoatingViewClient({ faqs }: BoatingViewClientProps) {
             Boating Charges & Tours
           </h1>
           <p className="gsap-boating-sub mt-5 text-base sm:text-xl text-neutral-600 leading-relaxed font-normal">
-            Compare hand-carved sunrise canoes, covered family shikaras, and kayak safaris. Standardized jetty pricing with a 25% token advance.
+            Compare hand-carved sunrise canoes, covered family shikaras, and kayak safaris. Standardized jetty pricing with an upfront token advance.
           </p>
         </div>
 
-        {/* Boating Cards Grid */}
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap gap-2.5 mb-12 border-b border-neutral-200 pb-6">
+          {CATEGORIES.map((cat) => {
+            const isActive = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                type="button"
+                className={`relative px-6 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all duration-300 ${
+                  isActive
+                    ? 'bg-black text-white shadow-md'
+                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 hover:text-black'
+                }`}
+              >
+                <span>{cat.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Boating Cards Grid with Multi-Image Interactive Carousels */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-          {EXPERIENCES.map((pkg, idx) => {
-            const pkgImage = thumbnails[idx % thumbnails.length];
+          {filteredExperiences.map((pkg) => {
+            const media = BOATING_MEDIA[pkg.id] || {
+              primaryImage: '/images/munroe island.jpg',
+              gallery: ['/images/munroe island.jpg'],
+              tag: `${pkg.boatType.toUpperCase()} • ${pkg.duration}`,
+              badge: 'FEATURED',
+              category: 'canoe',
+              priceLabel: `From ${formatINR(pkg.basePrice)}`,
+              boatName: pkg.title,
+              features: ['Certified Life Jackets', 'Native Captain Included'],
+            };
+
+            const activeImgIdx = activeImageIndices[pkg.id] || 0;
+            const currentImg = media.gallery[activeImgIdx] || media.primaryImage;
+            const hasMultipleImages = media.gallery.length > 1;
 
             return (
               <div
@@ -129,45 +199,110 @@ export function BoatingViewClient({ faqs }: BoatingViewClientProps) {
                 className="gsap-boating-card group rounded-3xl overflow-hidden bg-white border border-neutral-200 shadow-xs hover:shadow-2xl hover:border-black transition-all duration-500 flex flex-col justify-between"
               >
                 <div>
-                  <div className="aspect-[16/11] overflow-hidden relative bg-neutral-100">
+                  {/* Visual Card Image + Gallery Carousel */}
+                  <div className="aspect-[16/11] overflow-hidden relative bg-neutral-900 group/image">
                     <Image
                       fill
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                      className="object-cover transition-all duration-700 ease-out group-hover:scale-106"
                       alt={pkg.title}
-                      src={pkgImage}
+                      src={currentImg}
                       sizes="(max-width: 768px) 100vw, 400px"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent pointer-events-none" />
 
-                    <div className="absolute top-4 right-4 z-10">
+                    {/* Top Badges */}
+                    <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
+                      <span className="bg-black/80 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-[0.2em] px-3.5 py-1 rounded-full border border-white/10 shadow-sm">
+                        {media.badge}
+                      </span>
                       <span className="bg-white/95 backdrop-blur-md text-black text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full shadow-sm">
-                        From {formatINR(pkg.basePrice)}
+                        {media.priceLabel}
                       </span>
                     </div>
 
+                    {/* Bottom Vessel Spec */}
                     <div className="absolute bottom-4 left-4 right-4 text-white z-10">
-                      <span className="text-[10px] uppercase font-black tracking-[0.2em] text-amber-300 block">
-                        {pkg.boatType} • {pkg.canalAccess ? 'Narrow Canals' : 'Open Water'}
+                      <span className="text-[10px] uppercase font-black tracking-[0.2em] text-amber-300 block drop-shadow-sm">
+                        {media.tag}
                       </span>
                     </div>
+
+                    {/* Gallery Navigation Overlay (Visible on Hover / Multiple Images) */}
+                    {hasMultipleImages && (
+                      <>
+                        <div className="absolute inset-y-0 left-2 flex items-center z-20 opacity-0 group-hover/image:opacity-100 transition-opacity duration-200">
+                          <button
+                            type="button"
+                            onClick={(e) => handlePrevImage(e, pkg.id, media.gallery.length)}
+                            className="w-8 h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center backdrop-blur-sm transition-transform active:scale-90"
+                            aria-label="Previous image"
+                          >
+                            <ChevronLeft className="w-4 h-4" />
+                          </button>
+                        </div>
+                        <div className="absolute inset-y-0 right-2 flex items-center z-20 opacity-0 group-hover/image:opacity-100 transition-opacity duration-200">
+                          <button
+                            type="button"
+                            onClick={(e) => handleNextImage(e, pkg.id, media.gallery.length)}
+                            className="w-8 h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center backdrop-blur-sm transition-transform active:scale-90"
+                            aria-label="Next image"
+                          >
+                            <ChevronRight className="w-4 h-4" />
+                          </button>
+                        </div>
+
+                        {/* Gallery Dots Indicator */}
+                        <div className="absolute bottom-11 left-0 right-0 flex justify-center gap-1.5 z-20">
+                          {media.gallery.map((_, dotIdx) => (
+                            <button
+                              key={dotIdx}
+                              type="button"
+                              onClick={(e) => handleSelectDot(e, pkg.id, dotIdx)}
+                              aria-label={`View photo ${dotIdx + 1}`}
+                              className={`transition-all duration-300 rounded-full ${
+                                activeImgIdx === dotIdx
+                                  ? 'w-5 h-1.5 bg-amber-400'
+                                  : 'w-1.5 h-1.5 bg-white/60 hover:bg-white'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
                   </div>
 
+                  {/* Card Body */}
                   <div className="p-7 sm:p-8">
                     <h3 className="text-2xl font-black text-black tracking-tight mb-3 group-hover:text-neutral-700 transition-colors">
                       {pkg.title}
                     </h3>
-                    <p className="text-sm text-neutral-600 leading-relaxed font-normal mb-6 line-clamp-3">
+                    <p className="text-sm text-neutral-600 leading-relaxed font-normal mb-5 line-clamp-3">
                       {pkg.description}
                     </p>
 
+                    {/* Vessel Feature Pills */}
+                    {media.features && media.features.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mb-5">
+                        {media.features.map((feat, idx) => (
+                          <span
+                            key={idx}
+                            className="text-[10px] font-bold text-neutral-600 bg-neutral-100 px-2.5 py-1 rounded-md"
+                          >
+                            ✓ {feat}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Stats Grid */}
                     <div className="grid grid-cols-2 gap-4 py-4 border-y border-neutral-100 text-xs mb-5">
                       <div className="flex items-center gap-2 text-neutral-800 font-bold">
                         <Clock className="w-4 h-4 text-neutral-400 shrink-0" />
-                        <span>{pkg.duration.split(' ')[0]} Hours</span>
+                        <span>{pkg.duration}</span>
                       </div>
                       <div className="flex items-center gap-2 text-neutral-800 font-bold">
                         <Users className="w-4 h-4 text-neutral-400 shrink-0" />
-                        <span>Up to {pkg.maxCapacity} Guests</span>
+                        <span>Max {pkg.maxCapacity} Guests</span>
                       </div>
                     </div>
 
@@ -178,12 +313,13 @@ export function BoatingViewClient({ faqs }: BoatingViewClientProps) {
                   </div>
                 </div>
 
+                {/* CTA Action */}
                 <div className="p-7 sm:p-8 pt-0">
                   <Link
                     href={`/booking?exp=${pkg.id}`}
                     className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-full bg-black hover:bg-neutral-800 text-white font-black text-xs uppercase tracking-[0.18em] transition-all duration-300 shadow-md group-hover:shadow-xl active:scale-98"
                   >
-                    <span>Reserve With 25% Token</span>
+                    <span>Reserve With Token</span>
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform duration-300" />
                   </Link>
                 </div>

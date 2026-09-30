@@ -1,4 +1,4 @@
-export type BoatType = "CANOE" | "SHIKARA" | "KAYAK";
+export type BoatType = "CANOE" | "SHIKARA" | "KAYAK" | "SPEEDBOAT";
 
 export type TimeWindow = "SUNRISE" | "MORNING" | "AFTERNOON" | "SUNSET";
 
@@ -16,8 +16,8 @@ export interface CalculatedQuote {
   experienceTitle: string;
   adultsCount: number;
   totalAmount: number;
-  tokenAdvance: number;     // 25% payable upfront
-  jettyBalance: number;     // 75% payable at jetty
+  tokenAdvance: number;     // Upfront token payable to secure reservation
+  jettyBalance: number;     // Balance payable directly to boatman at pier
 }
 
 export interface BookingFormInput {

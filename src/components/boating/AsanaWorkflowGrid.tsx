@@ -12,14 +12,14 @@ export function AsanaWorkflowGrid() {
     {
       num: '02',
       icon: ShieldCheck,
-      title: 'Secure With a 25% Token',
-      desc: 'Lock in your scheduled boatman and departure slot online via Razorpay or WhatsApp. Eliminates jetty wait times and protects you from inflated spot pricing.',
+      title: 'Secure With a Token Advance',
+      desc: 'Lock in your scheduled boatman and departure slot online via UPI or WhatsApp. Eliminates pier wait times and protects you from inflated spot pricing.',
     },
     {
       num: '03',
       icon: MapPin,
-      title: 'Meet at The Boarding Jetty',
-      desc: 'Receive your boatman’s name, phone, and Google Maps pin on WhatsApp within 2–4 hours. Put on your life jackets and settle the remaining 75% at the jetty.',
+      title: 'Meet at Your Assigned Pier',
+      desc: 'Receive your boatman’s name, phone, and direct boarding pin on WhatsApp. Put on your life jackets and settle the remaining balance directly with your boatman.',
     },
   ];
 

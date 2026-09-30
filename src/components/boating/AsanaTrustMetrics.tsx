@@ -18,9 +18,9 @@ export function AsanaTrustMetrics() {
       detail: 'Generational punters born in Munroethuruthu with deep tidal knowledge',
     },
     {
-      value: '25%',
+      value: '₹400+',
       label: 'Advance Token Booking',
-      detail: 'Lock your slot online; settle remaining 75% directly at the jetty',
+      detail: 'Lock your slot online; settle remaining balance directly at the pier',
     },
   ];
 

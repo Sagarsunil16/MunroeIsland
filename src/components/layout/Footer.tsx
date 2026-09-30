@@ -91,12 +91,12 @@ export function Footer() {
           {/* Col 4: Jetty & Helpdesk */}
           <div>
             <h4 className="font-display font-semibold text-white text-sm mb-3">
-              Helpdesk & Meeting Point
+              Helpdesk & Boarding
             </h4>
             <div className="space-y-2.5 text-xs text-nature-sand/80">
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-nature-coral shrink-0 mt-0.5" />
-                <span>Munroe Island Boat Jetty, Kollam District, Kerala 691502</span>
+                <span>Munroe Island, Kollam (Exact pier pin sent on WhatsApp)</span>
               </div>
               <div className="flex items-center gap-2">
                 <MessageSquare className="h-4 w-4 text-emerald-400 shrink-0" />

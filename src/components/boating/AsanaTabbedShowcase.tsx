@@ -169,7 +169,7 @@ export function AsanaTabbedShowcase() {
                 <span className="text-[10px] uppercase tracking-wider text-asana-muted block">Total Fare</span>
                 <span className="text-2xl font-bold text-asana-ink">{formatINR(quote.totalAmount)}</span>
                 <span className="text-xs text-asana-coral font-bold block mt-0.5">
-                  25% Token: {formatINR(quote.tokenAdvance)} (Rest at jetty)
+                  Token: {formatINR(quote.tokenAdvance)} (Rest at pier)
                 </span>
               </div>
             </div>

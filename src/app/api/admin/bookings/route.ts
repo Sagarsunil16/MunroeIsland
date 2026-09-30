@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server';
 import { getAllBookings, updateBookingStatus } from '@/lib/bookings-store';
 import { prisma } from '@/lib/prisma';
+import { isAuthenticatedAdmin } from '@/lib/admin-auth';
 
-export async function GET() {
+export async function GET(request: Request) {
+  const isAuth = await isAuthenticatedAdmin(request);
+  if (!isAuth) {
+    return NextResponse.json({ error: 'Unauthorized access. Please log in.' }, { status: 401 });
+  }
+
   try {
     // 1. Try fetching from live cloud Neon PostgreSQL
     try {
@@ -27,6 +33,7 @@ export async function GET() {
             tokenAdvance: b.tokenAdvance,
             jettyBalance: b.jettyBalance,
             status: b.status,
+            paymentStatus: b.paymentStatus,
             assignedBoatman: b.assignedBoatman || undefined,
             paymentId: b.razorpayPaymentId || undefined,
             notes: b.notes || undefined,
@@ -48,8 +55,13 @@ export async function GET() {
 }
 
 export async function PATCH(request: Request) {
+  const isAuth = await isAuthenticatedAdmin(request);
+  if (!isAuth) {
+    return NextResponse.json({ error: 'Unauthorized access. Please log in.' }, { status: 401 });
+  }
+
   try {
-    const { id, status, assignedBoatman } = await request.json();
+    const { id, status, paymentStatus, assignedBoatman } = await request.json();
     if (!id || !status) {
       return NextResponse.json({ error: 'Missing id or status' }, { status: 400 });
     }
@@ -60,6 +72,7 @@ export async function PATCH(request: Request) {
         where: { bookingNumber: id },
         data: {
           status,
+          ...(paymentStatus ? { paymentStatus } : {}),
           assignedBoatman: assignedBoatman !== undefined ? assignedBoatman : undefined,
         },
       });
@@ -68,7 +81,7 @@ export async function PATCH(request: Request) {
     }
 
     // 2. Update local / memory store
-    const updated = updateBookingStatus(id, status, assignedBoatman);
+    const updated = updateBookingStatus(id, status, assignedBoatman, paymentStatus);
     if (!updated) {
       return NextResponse.json({ error: 'Booking not found' }, { status: 404 });
     }

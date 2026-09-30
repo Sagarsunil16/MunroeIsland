@@ -20,15 +20,15 @@ const VESSELS: VesselComparison[] = [
     badge: "Most Recommended",
     canalAccess: true,
     seating: "Traditional low bench / floor cushion",
-    capacity: "2 to 4 guests + 1 punter",
-    bestFor: "Couples, photographers, silent nature lovers",
+    capacity: "Up to 6 guests + 1 punter (₹800/1h • ₹1,200/2h)",
+    bestFor: "Couples, families, nature photographers",
     highlights: [
       "Accesses narrow, quiet mangrove tunnels",
       "Glides under low bridges without getting stuck",
       "Hand-paddled silently without motor noise",
-      "Best views of waking birdlife at 5:45 AM sunrise",
+      "Flat rate of ₹800 (1 hr) or ₹1,200 (2 hrs) for up to 6 guests",
     ],
-    ctaLink: "/booking?boat=CANOE",
+    ctaLink: "/booking?exp=canoe-sunrise",
   },
   {
     name: "Covered Shikara Boat",
@@ -36,15 +36,15 @@ const VESSELS: VesselComparison[] = [
     badge: "Family Favorite",
     canalAccess: false,
     seating: "Comfortable cushioned chairs with canopy roof",
-    capacity: "4 to 8 guests + 1 pilot",
+    capacity: "Up to 15 guests + 1 pilot",
     bestFor: "Families with kids, seniors, larger travel groups",
     highlights: [
       "Full sun shade and comfortable upright seating",
       "Cruises broader Ashtamudi Lake & Kallada river",
-      "Covers Chinese fishing nets & Dutch church",
-      "Motorized for effortless long-distance viewing",
+      "Tiered pricing: ₹1,200 (1h) / ₹2,000 (2h) for up to 9 guests",
+      "Large groups (10–15 guests): ₹1,400 (1h) / ₹2,400 (2h)",
     ],
-    ctaLink: "/booking?boat=SHIKARA",
+    ctaLink: "/booking?exp=shikara-1h",
   },
   {
     name: "Sit-on-top Kayak",
@@ -52,15 +52,31 @@ const VESSELS: VesselComparison[] = [
     badge: "Adventure Pick",
     canalAccess: true,
     seating: "Single / Tandem ergonomic kayak seat",
-    capacity: "1 to 2 paddlers per kayak",
+    capacity: "Up to 8 kayakers (₹250/hr per person)",
     bestFor: "Solo travelers, young couples, active paddlers",
     highlights: [
       "Ultimate maneuverability in shallow mangroves",
       "Paddle at your own pace with a local guide",
       "Zero environmental footprint",
-      "Intimate close-up perspective of the water",
+      "₹250 per person per hour (₹500 for 2 hours)",
     ],
-    ctaLink: "/booking?boat=KAYAK",
+    ctaLink: "/booking?exp=kayak-1h",
+  },
+  {
+    name: "Lake Speed Boat",
+    subtitle: "High-Speed Adrenaline Sprint",
+    badge: "Thrill Pick",
+    canalAccess: false,
+    seating: "Padded sports bucket seating",
+    capacity: "Up to 6 passengers flat",
+    bestFor: "Thrill seekers, youth groups, open lake cruisers",
+    highlights: [
+      "10-minute high-velocity sprint across Lake Ashtamudi",
+      "Fast glide past Kallada river mouth and rail bridge",
+      "High-power marine outboard motor with certified pilot",
+      "Flat rate of ₹1,500 for the boat (up to 6 passengers)",
+    ],
+    ctaLink: "/booking?exp=speedboat-10m",
   },
 ];
 
@@ -91,8 +107,8 @@ export function BoatComparison() {
           </div>
         </div>
 
-        {/* 3-Card Comparison Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* 4-Card Comparison Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {VESSELS.map((vessel) => (
             <div
               key={vessel.name}

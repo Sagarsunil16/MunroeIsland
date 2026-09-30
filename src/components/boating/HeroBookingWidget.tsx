@@ -37,7 +37,7 @@ export function HeroBookingWidget() {
             Check Fare & Instant Availability
           </h3>
           <p className="text-xs text-nature-forest/70">
-            Transparent jetty rates • 25% token advance
+            Transparent pier rates • Upfront token advance
           </p>
         </div>
         <div className="flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
@@ -151,13 +151,13 @@ export function HeroBookingWidget() {
             {formatINR(quote.totalAmount)}
           </span>
         </div>
-        <div className="mt-2 pt-2 border-t border-nature-mist/70 grid grid-cols-2 gap-2 text-xs">
+        <div className="mt-2 pt-2 border-nature-mist/70 grid grid-cols-2 gap-2 text-xs">
           <div>
-            <span className="text-nature-forest/60 block text-[11px]">Token Advance (25%):</span>
+            <span className="text-nature-forest/60 block text-[11px]">Token Advance:</span>
             <span className="font-bold text-nature-coral">{formatINR(quote.tokenAdvance)}</span>
           </div>
           <div className="text-right">
-            <span className="text-nature-forest/60 block text-[11px]">Pay at Jetty (75%):</span>
+            <span className="text-nature-forest/60 block text-[11px]">Pay at Pier:</span>
             <span className="font-semibold text-nature-forest">{formatINR(quote.jettyBalance)}</span>
           </div>
         </div>

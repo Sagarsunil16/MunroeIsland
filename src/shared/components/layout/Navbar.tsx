@@ -10,6 +10,7 @@ const navLinks = [
   { href: '/experiences', label: 'Experiences' },
   { href: '/#canal-journey', label: 'Canal Route' },
   { href: '/guides', label: 'Travel Guides' },
+  { href: '/booking/lookup', label: 'Check Booking' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -114,7 +115,7 @@ export function Navbar() {
               onClick={() => setMobileOpen(false)}
               className="bg-black text-white text-center text-xs uppercase tracking-wider font-black py-4 rounded-full shadow-md"
             >
-              Book a Boat (25% Token)
+              Book a Boat (Token Advance)
             </Link>
             <a
               href={`https://wa.me/${whatsappNumber}`}

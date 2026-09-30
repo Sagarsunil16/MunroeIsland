@@ -16,6 +16,7 @@ export interface StoredBooking {
   tokenAdvance: number;
   jettyBalance: number;
   status: 'RECEIVED' | 'ASSIGNED' | 'COMPLETED' | 'CANCELLED';
+  paymentStatus?: 'PENDING' | 'PENDING_VERIFICATION' | 'PAID' | 'REFUNDED';
   assignedBoatman?: string;
   paymentId?: string;
   notes?: string;
@@ -135,7 +136,12 @@ export function getBookingByNumber(bookingNumber: string): StoredBooking | null 
   }
 }
 
-export function updateBookingStatus(id: string, status: StoredBooking['status'], assignedBoatman?: string): StoredBooking | null {
+export function updateBookingStatus(
+  id: string,
+  status: StoredBooking['status'],
+  assignedBoatman?: string,
+  paymentStatus?: StoredBooking['paymentStatus']
+): StoredBooking | null {
   const all = getAllBookings();
   const booking = all.find((b) => b.id === id || b.bookingNumber === id);
   if (!booking) return null;
@@ -143,6 +149,9 @@ export function updateBookingStatus(id: string, status: StoredBooking['status'],
   booking.status = status;
   if (assignedBoatman !== undefined) {
     booking.assignedBoatman = assignedBoatman;
+  }
+  if (paymentStatus !== undefined) {
+    booking.paymentStatus = paymentStatus;
   }
 
   memoryStore.set(booking.bookingNumber, booking);

@@ -3,49 +3,17 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
 import { EXPERIENCES } from '@/lib/pricing';
+import { BOATING_MEDIA } from '@/lib/boating-media';
 import { formatINR } from '@/lib/utils';
 import { ArrowRight, Clock, Users, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
-
-const EXPERIENCE_MEDIA: Record<string, { image: string; tag: string; badge: string; category: string }> = {
-  'sunrise-canoe': {
-    image: '/images/munroe island.jpg',
-    tag: 'HAND-PADDLED CANOE • 2.5 HOURS',
-    badge: 'MOST POPULAR',
-    category: 'canoe',
-  },
-  'daytime-canoe': {
-    image: '/images/mangroove.jpg',
-    tag: 'VILLAGE EXPLORER • 2.0 HOURS',
-    badge: 'VILLAGE LIFE',
-    category: 'canoe',
-  },
-  'shikara-morning': {
-    image: '/images/munroe island2.jpg',
-    tag: 'COVERED SHIKARA • 2.0 HOURS',
-    badge: 'BEST FOR FAMILIES',
-    category: 'shikara',
-  },
-  'grand-shikara': {
-    image: '/images/munroe island.jpg',
-    tag: 'GRAND SHIKARA • 3.0 HOURS',
-    badge: 'GROUP CRUISE',
-    category: 'shikara',
-  },
-  'kayak-tour': {
-    image: '/images/kayaking1.jpg',
-    tag: 'GUIDED KAYAK • 2.0 HOURS',
-    badge: 'ECO ADVENTURE',
-    category: 'kayak',
-  },
-};
 
 const CATEGORIES = [
   { id: 'all', label: 'All Expeditions' },
   { id: 'canoe', label: 'Wooden Canoes' },
   { id: 'shikara', label: 'Shaded Shikaras' },
   { id: 'kayak', label: 'Kayaking' },
+  { id: 'speedboat', label: 'Speed Boat' },
 ];
 
 export function VisitTheUSAExperiences() {
@@ -57,7 +25,7 @@ export function VisitTheUSAExperiences() {
 
   const filteredExperiences = EXPERIENCES.filter((exp) => {
     if (activeCategory === 'all') return true;
-    const media = EXPERIENCE_MEDIA[exp.id];
+    const media = BOATING_MEDIA[exp.id];
     return media?.category === activeCategory;
   });
 
@@ -202,12 +170,14 @@ export function VisitTheUSAExperiences() {
           onMouseLeave={handleUserInteractionEnd}
           className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory no-scrollbar pb-6 pt-2 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0"
         >
-          {filteredExperiences.map((exp, idx) => {
-            const media = EXPERIENCE_MEDIA[exp.id] || {
-              image: '/images/munroe island.jpg',
+          {filteredExperiences.map((exp) => {
+            const media = BOATING_MEDIA[exp.id] || {
+              primaryImage: '/images/munroe island.jpg',
+              gallery: ['/images/munroe island.jpg'],
               tag: `${exp.boatType.toUpperCase()} • ${exp.duration}`,
               badge: 'FEATURED',
               category: 'canoe',
+              priceLabel: `From ${formatINR(exp.basePrice)}`,
             };
 
             return (
@@ -217,16 +187,16 @@ export function VisitTheUSAExperiences() {
               >
                 <div>
                   {/* Visual Card Image */}
-                  <div className="relative aspect-[16/11] w-full overflow-hidden bg-neutral-100">
+                  <div className="relative aspect-[16/11] w-full overflow-hidden bg-neutral-900">
                     <Image
-                      src={media.image}
+                      src={media.primaryImage}
                       alt={exp.title}
                       fill
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-106"
                       sizes="(max-width: 768px) 85vw, 400px"
                     />
                     {/* Contrast gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent pointer-events-none" />
 
                     {/* Top Badges */}
                     <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
@@ -268,9 +238,20 @@ export function VisitTheUSAExperiences() {
                     </div>
 
                     {/* Safety Line */}
-                    <div className="flex items-center gap-2 text-xs text-emerald-900 font-semibold">
+                    <div className="flex items-center gap-2 text-xs text-emerald-900 font-semibold mb-3">
                       <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>100% Life Jackets & Native Boatman</span>
+                    </div>
+
+                    {/* Rate & Token Pill */}
+                    <div className="flex items-center justify-between pt-3 border-t border-neutral-100 text-xs">
+                      <div>
+                        <span className="text-[10px] font-black uppercase tracking-wider text-neutral-400 block">Rate:</span>
+                        <span className="font-black text-sm text-black">{media.priceLabel}</span>
+                      </div>
+                      <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-[10px] font-black uppercase tracking-wider border border-emerald-200">
+                        Token Advance Lock
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -281,7 +262,7 @@ export function VisitTheUSAExperiences() {
                     href={`/booking?exp=${exp.id}`}
                     className="w-full flex items-center justify-center gap-2 py-3.5 sm:py-4 px-6 rounded-full bg-black hover:bg-neutral-800 text-white font-black text-xs uppercase tracking-[0.18em] transition-all duration-300 shadow-md group-hover:shadow-xl active:scale-98"
                   >
-                    <span>Reserve With 25% Token</span>
+                    <span>Reserve With Token</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
                   </Link>
                 </div>

@@ -43,7 +43,7 @@ const SCENES: VideoScene[] = [
     label: 'Hand-Paddled Canoe Experience',
     title: 'Silent Gliding on Calm Kerala Waterways',
     timeTag: '05:45 AM • Sunrise Departure',
-    location: 'Peringalam Village Waterways',
+    location: 'Munroe Backwater Village Canals',
     description:
       'Experience the complete quiet of hand-paddled backwater exploration where motorized houseboats cannot enter.',
     src: '/videos/munroe-canal-boating.mp4',

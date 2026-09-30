@@ -26,13 +26,13 @@ export const GUIDES: GuideArticle[] = [
     publishedDate: "2026-03-10",
     readTime: "5 min read",
     summary:
-      "Everything you need to know about boat ride charges in Munroe Island: starting from ₹1,300 for traditional canoes and ₹2,000 for covered shikaras. Understand departure timings and advance token booking.",
+      "Everything you need to know about boat ride charges in Munroe Island: starting from ₹800 for traditional canoes and ₹1,200 for covered shikaras. Understand departure timings and advance token booking.",
     content: [
       {
         heading: "Official Boating Rates on Munroe Island",
         body: [
-          "Munroe Island boating prices are standardized based on vessel type, duration, and passenger count. Traditional hand-paddled wooden canoes start at ₹1,300 for a 2-hour daytime village ride and ₹1,600 for the signature 2.5-hour sunrise voyage (covering 2 adults). Extra guests are charged an affordable ₹250–₹300 per person.",
-          "For larger families or senior travelers requiring shaded seating, covered Shikara boats start at ₹2,000 for 2 hours and ₹2,800 for the 3-hour grand lake circuit, accommodating up to 8 passengers.",
+          "Munroe Island boating prices are standardized based on vessel type and duration. Traditional hand-paddled wooden canoes are ₹800 for a 1-hour canal tour and ₹1,200 for the signature 2-hour sunrise or daytime tour (up to 6 passengers for the entire boat).",
+          "For larger families or groups requiring shaded seating, covered Shikara cruises start at ₹1,200 for 1 hour and ₹2,000 for 2 hours (up to 9 guests). For 10 to 15 guests, rates are ₹1,400 for 1 hour and ₹2,400 for 2 hours. Guided kayaks are ₹250/hour per person.",
         ],
       },
       {
@@ -44,9 +44,9 @@ export const GUIDES: GuideArticle[] = [
         ],
       },
       {
-        heading: "Why 25% Token Advance Is Recommended",
+        heading: "Why Upfront Token Advance Is Recommended",
         body: [
-          "During peak weekends and winter travel months, unreserved tourists often face 1–2 hour wait times or inflated spot rates at the jetty. Booking your slot with a 25% token advance locks in your boatman and guaranteed boarding time without paying the full amount upfront.",
+          "During peak weekends and winter travel months, unreserved tourists often face 1–2 hour wait times or inflated spot rates at the pier. Booking your slot with an upfront token advance (e.g. ₹400 for a ₹1,200 booking) locks in your boatman and guaranteed boarding time without paying the full amount upfront.",
         ],
       },
     ],
@@ -57,9 +57,9 @@ export const GUIDES: GuideArticle[] = [
           "Official native boatmen maintain standardized platform fares. Booking online ensures transparent rates with zero unexpected surcharges upon arrival.",
       },
       {
-        question: "Can we pay by UPI at the boat jetty?",
+        question: "Can we pay by UPI at the boarding pier?",
         answer:
-          "Yes, most boatmen accept GPay, PhonePe, and Paytm UPI payments for settling the remaining 75% balance, as well as cash.",
+          "Yes, boatmen accept GPay, PhonePe, and Paytm UPI payments for settling the remaining jetty balance, as well as cash.",
       },
     ],
   },
@@ -142,9 +142,9 @@ export const GUIDES: GuideArticle[] = [
     ],
     faq: [
       {
-        question: "Is there car parking available near the boat jetty?",
+        question: "Is there vehicle parking available near the boarding piers?",
         answer:
-          "Yes, designated parking spaces for two-wheelers and four-wheelers are available right at the primary Munroe Island boat jetty.",
+          "Yes, dedicated parking spaces for two-wheelers and four-wheelers are available directly at the assigned boat boarding piers across the island.",
       },
     ],
   },

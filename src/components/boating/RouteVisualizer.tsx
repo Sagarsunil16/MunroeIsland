@@ -140,7 +140,7 @@ export function RouteVisualizer() {
             </div>
 
             <p className="text-[11px] text-nature-forest/60 mt-4">
-              *Boarding starts from the official Munroe Island Boat Jetty. Exact jetty directions and native boatman details are sent upon token reservation.
+              *Boarding piers vary by boatman and water level. The exact boarding pier location and assigned native boatman details are sent directly to your WhatsApp upon booking.
             </p>
           </div>
 

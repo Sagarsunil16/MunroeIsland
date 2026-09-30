@@ -131,9 +131,9 @@ export function HeroBookingCapsule() {
       {/* Micro Info Footnote */}
       <div className="px-4 py-2 border-t border-canvas-borderLight flex flex-wrap items-center justify-between text-[11px] text-ink-muted gap-2">
         <div className="flex items-center gap-3">
-          <span>🔒 25% Token Advance: <strong className="text-forest">{formatINR(quote.tokenAdvance)}</strong></span>
+          <span>🔒 Token Advance: <strong className="text-forest">{formatINR(quote.tokenAdvance)}</strong></span>
           <span>•</span>
-          <span>Pay rest at jetty: <strong className="text-forest">{formatINR(quote.jettyBalance)}</strong></span>
+          <span>Pay rest at pier: <strong className="text-forest">{formatINR(quote.jettyBalance)}</strong></span>
         </div>
 
         <a

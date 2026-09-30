@@ -30,7 +30,7 @@ export function InteractiveTripMatcher() {
         boatType: 'Motorized Shaded Shikara',
         duration: '2.0 Hours',
         fare: 2000,
-        tokenAdvance: 500,
+        tokenAdvance: 400,
         reason: 'Spacious armchair seating, full sun protection canopy, and easy walk-in boarding—ideal for children, elders, and groups.',
         bookingParam: 'shikara-morning',
         badge: 'BEST FOR FAMILIES & GROUPS',
@@ -42,8 +42,8 @@ export function InteractiveTripMatcher() {
         title: 'Guided Backwater Kayak Tour',
         boatType: 'Single / Tandem Kayak',
         duration: '2.0 Hours',
-        fare: 1500,
-        tokenAdvance: 375,
+        fare: 1000,
+        tokenAdvance: 300,
         reason: 'Freedom to paddle directly through narrow 2-meter mangrove channels where no other boat can squeeze.',
         bookingParam: 'kayak-tour',
         badge: 'TOP PICK FOR ACTIVE EXPLORERS',
@@ -56,8 +56,8 @@ export function InteractiveTripMatcher() {
         title: 'Sunset Island Canoe Tour',
         boatType: 'Hand-Paddled Wooden Canoe',
         duration: '2.0 Hours',
-        fare: 1300,
-        tokenAdvance: 325,
+        fare: 1200,
+        tokenAdvance: 400,
         reason: 'Drift past golden hour Chinese fishing nets and calm lake shores with the setting sun reflecting on Ashtamudi Lake.',
         bookingParam: 'sunset-canoe',
         badge: 'ROMANTIC GOLDEN HOUR PICK',
@@ -67,8 +67,8 @@ export function InteractiveTripMatcher() {
     return {
       title: 'Sunrise Mangrove Canoe Expedition',
       boatType: 'Hand-Paddled Wooden Canoe',
-      duration: '2.5 Hours',
-      fare: 1600,
+      duration: '2.0 Hours',
+      fare: 1200,
       tokenAdvance: 400,
       reason: 'Our highest-rated journey: glassy canal waters, morning mist, awakening birds, and tranquil mangrove tunnel arches.',
       bookingParam: 'sunrise-canoe',
@@ -188,7 +188,7 @@ export function InteractiveTripMatcher() {
                   {formatINR(match.fare)}
                 </span>
                 <span className="text-xs text-neutral-600 font-bold block mt-1">
-                  25% Token Advance: {formatINR(match.tokenAdvance)}
+                  Token Advance: {formatINR(match.tokenAdvance)}
                 </span>
               </div>
 

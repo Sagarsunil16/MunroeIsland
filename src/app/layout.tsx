@@ -1,23 +1,8 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/shared/components/layout/Navbar";
 import { Footer } from "@/shared/components/layout/Footer";
 import { GoogleAnalytics } from "@/shared/components/analytics/GoogleAnalytics";
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["400", "600", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://munroe-island.in"),
@@ -46,11 +31,22 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Munroe Waterways | Hand-Paddled Canoe & Backwater Expeditions",
     description:
-      "Silent mangrove canals, authentic wooden canoes, and transparent 25% token booking with native boatmen.",
+      "Silent mangrove canals, authentic wooden canoes, and transparent token advance booking with native boatmen.",
     url: "https://munroe-island.in",
     siteName: "Munroe Waterways",
     locale: "en_IN",
     type: "website",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 
@@ -62,7 +58,7 @@ export default function RootLayout({
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
 
   return (
-    <html lang="en" className={`${plusJakartaSans.variable} ${playfairDisplay.variable}`}>
+    <html lang="en">
       <head>
         <GoogleAnalytics />
         <link
@@ -86,9 +82,8 @@ export default function RootLayout({
               },
               address: {
                 "@type": "PostalAddress",
-                addressLocality: "Kollam",
+                addressLocality: "Munroe Island, Kollam",
                 addressRegion: "Kerala",
-                postalCode: "691502",
                 addressCountry: "IN",
               },
               touristType: ["Eco-tourism", "Backwater tourism", "Nature tourism"],

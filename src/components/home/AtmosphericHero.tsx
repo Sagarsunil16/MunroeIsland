@@ -229,7 +229,7 @@ export function AtmosphericHero() {
                 Morning Canoe Glide
               </span>
               <span className="bg-backwater-dark/85 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold shadow-xs">
-                From ₹1,300
+                From ₹800
               </span>
             </div>
 
@@ -254,10 +254,10 @@ export function AtmosphericHero() {
             </div>
             <div>
               <span className="block text-xs font-bold text-backwater-ink">
-                25% Token Guarantee
+                Secure Token Guarantee
               </span>
               <span className="block text-[11px] text-backwater-muted">
-                Pay remaining 75% at the jetty directly to your captain.
+                Pay small token online, balance at the pier directly to captain.
               </span>
             </div>
           </div>

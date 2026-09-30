@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { CheckCircle2, MessageSquare, ArrowLeft, ArrowRight, Clock, Users, Calendar, MapPin, IndianRupee } from 'lucide-react';
-import { getBookingByNumber } from '@/lib/bookings-store';
+import { CheckCircle2, MessageSquare, ArrowLeft, ArrowRight, Clock, Users, Calendar, MapPin, IndianRupee, AlertCircle } from 'lucide-react';
+import { getBookingByNumber, StoredBooking } from '@/lib/bookings-store';
+import { prisma } from '@/lib/prisma';
 import { formatINR } from '@/lib/utils';
 import { AddToCalendarButton } from '@/components/booking/AddToCalendarButton';
 
@@ -14,12 +15,87 @@ export default async function ConfirmationPage({ params }: ConfirmationPageProps
   const { bookingNumber } = await params;
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
 
-  const booking = getBookingByNumber(bookingNumber);
+  let booking: StoredBooking | null = getBookingByNumber(bookingNumber);
+
+  if (!booking) {
+    try {
+      const dbBooking = await prisma.booking.findUnique({
+        where: { bookingNumber },
+      });
+      if (dbBooking) {
+        booking = {
+          id: dbBooking.id,
+          bookingNumber: dbBooking.bookingNumber,
+          customerName: dbBooking.customerName,
+          customerPhone: dbBooking.customerPhone,
+          customerEmail: dbBooking.customerEmail || undefined,
+          boatType: dbBooking.boatType,
+          experienceTitle: dbBooking.experienceTitle,
+          date: dbBooking.date.toISOString().split("T")[0],
+          timeWindow: dbBooking.timeWindow,
+          adultsCount: dbBooking.adultsCount,
+          totalAmount: dbBooking.totalAmount,
+          tokenAdvance: dbBooking.tokenAdvance,
+          jettyBalance: dbBooking.jettyBalance,
+          status: dbBooking.status as StoredBooking["status"],
+          paymentStatus: dbBooking.paymentStatus as StoredBooking["paymentStatus"],
+          assignedBoatman: dbBooking.assignedBoatman || undefined,
+          paymentId: dbBooking.razorpayPaymentId || undefined,
+          notes: dbBooking.notes || undefined,
+          createdAt: dbBooking.createdAt.toISOString(),
+        };
+      }
+    } catch (e) {
+      console.warn("DB lookup skipped in confirmation page:", e);
+    }
+  }
+
+  if (!booking) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center p-4 sm:p-6 pt-32 sm:pt-36 pb-28 text-black">
+        <div className="relative rounded-3xl bg-neutral-50 border border-neutral-200/90 p-6 sm:p-12 text-center shadow-sm max-w-xl w-full">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-amber-500 text-white flex items-center justify-center mx-auto mb-5 shadow-sm">
+            <AlertCircle className="w-7 h-7 sm:w-8 sm:h-8" />
+          </div>
+
+          <span className="text-[10px] font-black uppercase tracking-[0.25em] text-neutral-400 block mb-1">
+            RESERVATION STATUS
+          </span>
+
+          <h1 className="text-2xl sm:text-3xl font-sans font-black text-black mb-3 tracking-tight">
+            Booking Incomplete or Not Found
+          </h1>
+          <p className="text-neutral-600 text-xs sm:text-sm mb-6 leading-relaxed font-normal max-w-md mx-auto">
+            We could not find a confirmed reservation for reference <span className="font-mono font-bold text-black">{bookingNumber}</span>. If you closed or cancelled the payment window, no advance was charged and your reservation was not placed.
+          </p>
+
+          <div className="space-y-3">
+            <Link
+              href="/booking"
+              className="w-full inline-flex items-center justify-center gap-2 bg-black hover:bg-neutral-800 text-white py-4 px-8 rounded-full font-black text-xs tracking-[0.18em] uppercase transition-all duration-300 shadow-md"
+            >
+              <span>Back to Booking Form</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </Link>
+            <a
+              href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                `Hello, I encountered an issue booking reference ${bookingNumber}. Could you help verify?`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center gap-2 border border-neutral-300 hover:border-black bg-white hover:bg-neutral-50 text-black py-3.5 px-6 rounded-full font-black text-[11px] tracking-[0.16em] uppercase transition-all"
+            >
+              <MessageSquare className="w-4 h-4 text-emerald-600" />
+              <span>Inquire via WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const message = encodeURIComponent(
-    `Hello! I have completed my booking reservation on munroe-island.in.\n\n*Booking Reference:* ${bookingNumber}${
-      booking ? `\n*Guest:* ${booking.customerName}\n*Tour:* ${booking.experienceTitle}\n*Date:* ${booking.date} (${booking.timeWindow})` : ''
-    }\n\nPlease confirm our boatman assignment and jetty meeting point.`
+    `Hello! I have completed my booking reservation on munroe-island.in.\n\n*Booking Reference:* ${bookingNumber}\n*Guest:* ${booking.customerName}\n*Tour:* ${booking.experienceTitle}\n*Date:* ${booking.date} (${booking.timeWindow})\n\nPlease confirm our boatman assignment and jetty meeting point.`
   );
 
   return (
@@ -38,7 +114,9 @@ export default async function ConfirmationPage({ params }: ConfirmationPageProps
           Request Received!
         </h1>
         <p className="text-neutral-600 text-xs sm:text-sm mb-6 sm:mb-8 leading-relaxed font-normal max-w-md mx-auto">
-          Your 25% token booking has been received. Our local dispatch team is assigning your trip directly to an authorized native boat captain.
+          {booking?.paymentStatus === 'PENDING_VERIFICATION'
+            ? 'Your 12-digit UPI reference number has been recorded. Our dispatch desk is cross-referencing your transaction with our bank ledger and securing your boat captain.'
+            : 'Your token booking has been received. Our local dispatch team is assigning your trip directly to an authorized native boat captain.'}
         </p>
 
         {/* Reference Badge */}
@@ -94,13 +172,19 @@ export default async function ConfirmationPage({ params }: ConfirmationPageProps
                 <span className="font-bold text-neutral-900">{formatINR(booking.totalAmount)}</span>
               </div>
               <div className="flex justify-between text-emerald-700 font-bold">
-                <span>25% Advance Paid:</span>
+                <span>Token Advance Paid:</span>
                 <span>{formatINR(booking.tokenAdvance)}</span>
               </div>
               <div className="flex justify-between text-neutral-900 font-black pt-1 border-t border-neutral-200">
                 <span>Due at Jetty:</span>
                 <span>{formatINR(booking.jettyBalance)}</span>
               </div>
+              {booking.paymentId && (
+                <div className="pt-1.5 border-t border-dashed border-neutral-200 flex justify-between text-[11px] text-neutral-500 font-mono">
+                  <span>Ref:</span>
+                  <span className="font-bold text-neutral-700">{booking.paymentId}</span>
+                </div>
+              )}
             </div>
           </div>
         )}

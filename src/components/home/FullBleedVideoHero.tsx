@@ -110,7 +110,7 @@ export function FullBleedVideoHero() {
               href="/booking"
               className="bg-white hover:bg-gray-100 text-black font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-full transition-all duration-300 shadow-2xl flex items-center gap-2 hover:scale-105 active:scale-95"
             >
-              <span>Book a Boat (25% Token)</span>
+              <span>Book a Boat (Token Advance)</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
 

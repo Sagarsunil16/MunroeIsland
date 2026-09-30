@@ -23,19 +23,19 @@ const munroeIslandFaqs = [
   },
   {
     q: 'What are Munroe Island boating charges?',
-    a: 'Hand-paddled wooden canoes start at ₹1,300 for a 2-hour private village tour and ₹1,600 for the signature 2.5-hour sunrise voyage (covering 2 adults). Extra guests are ₹250–₹300. Covered shikara boats start from ₹2,000 for families (up to 4 pax).',
+    a: 'Hand-paddled wooden canoes start at ₹800 for a 1-hour tour and ₹1,200 for 2 hours (up to 6 passengers for the entire boat). Covered family shikaras start at ₹1,200 for 1 hour and ₹2,000 for 2 hours (up to 9 guests). Guided kayaks are ₹250/hour per person.',
   },
   {
     q: 'What is the best time for boating in Munroe Island?',
     a: 'The early morning Sunrise tour (5:45 AM – 8:15 AM) is by far the most magical window. The temperature is cool, the water is glassy calm, and birdlife is most active. Sunset rides (4:30 PM – 6:30 PM) over Ashtamudi Lake are also breathtaking.',
   },
   {
-    q: 'How does the 25% token booking system work?',
-    a: 'You pay a 25% token advance online to confirm your date and time window. We assign your reservation to an authorized native boatman. The remaining 75% balance is paid directly to the boatman in cash or UPI when you arrive at the jetty.',
+    q: 'How does the online token booking system work?',
+    a: 'You pay an upfront token advance (e.g., ₹400 for a ₹1,200 booking) online to confirm your date and time window. We immediately assign your reservation to an authorized native boatman. The remaining balance is paid directly to your boatman in cash or UPI when you arrive at the pier.',
   },
   {
     q: 'How do I reach Munroe Island from Kollam or Varkala?',
-    a: 'By train, get off at Munroturuttu (MQO) station — only 20 minutes from Kollam Junction. The boat jetty is a 5-minute auto ride. By road, it is 25 km from Kollam and 45 km from Varkala Cliff (approx. 1 hour 20 minutes).',
+    a: 'By train, get off at Munroturuttu (MQO) station — only 20 minutes from Kollam Junction. Your assigned boarding pier is a quick 5-minute auto ride. By road, it is 25 km from Kollam and 45 km from Varkala Cliff (approx. 1 hour 20 minutes).',
   },
 ];
 
@@ -196,7 +196,7 @@ export default function HomePage() {
             </h2>
 
             <p className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-normal">
-              Reserve your 5:45 AM sunrise wooden canoe today. Pay only a 25% token advance online, and settle the remaining balance directly with your native boatman at the jetty.
+              Reserve your 5:45 AM sunrise wooden canoe today. Pay only an upfront token advance online, and settle the remaining balance directly with your native boatman at the pier.
             </p>
 
             <div className="pt-4 flex flex-wrap justify-center gap-4">
@@ -204,7 +204,7 @@ export default function HomePage() {
                 href="/booking"
                 className="bg-white hover:bg-gray-100 text-black font-bold text-xs uppercase tracking-wider px-9 py-4 rounded-full transition-all duration-300 shadow-2xl inline-flex items-center gap-2 hover:scale-105"
               >
-                <span>Book a Boat (25% Token)</span>
+                <span>Book a Boat (Token Advance)</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link

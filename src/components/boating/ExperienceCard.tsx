@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ExperienceConfig } from "@/lib/pricing";
+import { ExperienceConfig, calculateQuote } from "@/lib/pricing";
 import { formatINR } from "@/lib/utils";
 import { Clock, Users, CheckCircle, Navigation, MessageSquare } from "lucide-react";
 import { buildWhatsAppInquiryUrl } from "@/lib/whatsapp";
@@ -9,6 +9,7 @@ interface ExperienceCardProps {
 }
 
 export function ExperienceCard({ experience }: ExperienceCardProps) {
+  const quote = calculateQuote(experience.id, experience.baseCapacity);
   const whatsappUrl = buildWhatsAppInquiryUrl({
     experienceTitle: experience.title,
     adultsCount: experience.baseCapacity,
@@ -67,7 +68,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
           </div>
           <div className="text-right">
             <span className="text-[11px] text-nature-coral font-bold block">
-              25% Token: {formatINR(Math.round(experience.basePrice * 0.25))}
+              Token: {formatINR(quote.tokenAdvance)}
             </span>
             <span className="text-[10px] text-nature-forest/60">Balance on arrival</span>
           </div>

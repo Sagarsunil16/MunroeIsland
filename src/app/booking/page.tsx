@@ -1,14 +1,18 @@
 'use client';
 
 import { useState, useEffect, useRef, Suspense } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { EXPERIENCES, calculateQuote } from '@/lib/pricing';
+import { BOATING_MEDIA } from '@/lib/boating-media';
 import { formatINR } from '@/lib/utils';
 import { buildWhatsAppInquiryUrl } from '@/lib/whatsapp';
 import { TimeWindow } from '@/types';
 import { AlertCircle, CheckCircle2, ChevronDown, CreditCard, MessageSquare, Minus, Plus, ShieldCheck, ArrowRight } from 'lucide-react';
+import { UpiPaymentModal } from '@/components/booking/UpiPaymentModal';
 
 function FieldError({ msg }: { msg?: string }) {
   return (
@@ -73,6 +77,23 @@ function BookingFormContent() {
   const [notes, setNotes] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
+  const [upiModalOpen, setUpiModalOpen] = useState(false);
+  const [pendingBookingData, setPendingBookingData] = useState<{
+    bookingNumber: string;
+    customerName: string;
+    customerPhone: string;
+    customerEmail?: string;
+    experienceId: string;
+    experienceTitle: string;
+    boatType: string;
+    date: string;
+    timeWindow: string;
+    adultsCount: number;
+    totalAmount: number;
+    tokenAdvance: number;
+    jettyBalance: number;
+    notes?: string;
+  } | null>(null);
 
   const experience =
     EXPERIENCES.find((e) => e.id === experienceId) || EXPERIENCES[0];
@@ -137,18 +158,48 @@ function BookingFormContent() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to process reservation');
 
-      // Check if Razorpay Key is configured
+      // 1. Direct Dynamic UPI (0% Fee, Bank-to-Bank Instant Settlement)
+      const upiId = process.env.NEXT_PUBLIC_UPI_ID;
+      if (upiId && upiId.trim() !== '') {
+        setPendingBookingData({
+          bookingNumber: data.bookingNumber,
+          customerName,
+          customerPhone,
+          customerEmail,
+          experienceId: experience.id,
+          experienceTitle: experience.title,
+          boatType: experience.boatType,
+          date,
+          timeWindow,
+          adultsCount: quote.adultsCount,
+          totalAmount: quote.totalAmount,
+          tokenAdvance: quote.tokenAdvance,
+          jettyBalance: quote.jettyBalance,
+          notes,
+        });
+        setIsSubmitting(false);
+        setUpiModalOpen(true);
+        return;
+      }
+
+      // 2. Gateway Fallback (Razorpay)
       const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
       if (razorpayKey && razorpayKey.trim() !== '') {
         const loaded = await loadRazorpayScript();
-        const RazorpayGlobal = (window as unknown as { Razorpay?: new (opts: unknown) => { open: () => void } }).Razorpay;
+        const RazorpayGlobal = (window as unknown as {
+          Razorpay?: new (opts: unknown) => {
+            open: () => void;
+            on: (event: string, handler: (resp: { error?: { description?: string } }) => void) => void;
+          };
+        }).Razorpay;
+
         if (loaded && RazorpayGlobal) {
           const options = {
             key: razorpayKey,
-            amount: quote.tokenAdvance * 100, // paise
+            amount: Math.round(quote.tokenAdvance * 100), // paise
             currency: 'INR',
             name: 'Visit Munroe Island',
-            description: `25% Token Advance: ${quote.experienceTitle}`,
+            description: `Token Advance: ${quote.experienceTitle}`,
             order_id: data.razorpayOrderId,
             prefill: {
               name: customerName,
@@ -168,7 +219,7 @@ function BookingFormContent() {
               razorpay_signature?: string;
             }) {
               try {
-                await fetch('/api/checkout/verify-payment', {
+                const verifyRes = await fetch('/api/checkout/verify-payment', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({
@@ -176,33 +227,66 @@ function BookingFormContent() {
                     razorpayOrderId: response.razorpay_order_id,
                     razorpayPaymentId: response.razorpay_payment_id,
                     razorpaySignature: response.razorpay_signature,
+                    customerName,
+                    customerPhone,
+                    customerEmail,
+                    experienceId: experience.id,
+                    date,
+                    timeWindow,
+                    adultsCount: quote.adultsCount,
+                    notes,
                   }),
                 });
+
+                const verifyData = await verifyRes.json();
+                if (!verifyRes.ok) {
+                  throw new Error(verifyData.error || 'Payment verification failed');
+                }
+
+                router.push(
+                  `/booking/confirmation/${data.bookingNumber}?paymentId=${response.razorpay_payment_id || ''}`
+                );
               } catch (verifyErr) {
                 console.error('Payment verification error:', verifyErr);
+                setFormError(
+                  verifyErr instanceof Error
+                    ? verifyErr.message
+                    : 'Payment verification failed. Please contact us via WhatsApp.'
+                );
+                setIsSubmitting(false);
               }
-              router.push(
-                `/booking/confirmation/${data.bookingNumber}?paymentId=${response.razorpay_payment_id || ''}`
-              );
             },
             modal: {
               ondismiss: function () {
-                router.push(`/booking/confirmation/${data.bookingNumber}`);
+                setIsSubmitting(false);
+                setFormError(
+                  'Payment window was closed. Your reservation was NOT confirmed and no advance was charged. Please complete payment to reserve your boat.'
+                );
               },
             },
           };
+
           const rzp = new RazorpayGlobal(options);
+          if (typeof rzp.on === 'function') {
+            rzp.on('payment.failed', function (errResp) {
+              setIsSubmitting(false);
+              setFormError(
+                errResp?.error?.description || 'Payment was unsuccessful. Please try again with another payment method.'
+              );
+            });
+          }
           rzp.open();
           return;
+        } else {
+          throw new Error('Payment gateway failed to load. Please try again or book via WhatsApp.');
         }
       }
 
-      // Default / direct confirmation routing
+      // Fallback routing only if Razorpay gateway is not configured
       router.push(`/booking/confirmation/${data.bookingNumber}`);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Something went wrong';
       setFormError(msg);
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -253,8 +337,17 @@ function BookingFormContent() {
             Reserve Your Boat
           </h1>
           <p className="gsap-booking-sub mt-5 text-base sm:text-xl text-neutral-600 leading-relaxed font-normal">
-            Pay only a 25% token advance today to lock your date and departure time. Settle the remaining 75% balance directly with your assigned native boatman at the jetty.
+            Pay only an upfront token advance today to lock your date and departure time. Settle the remaining balance directly with your assigned native boatman at the pier.
           </p>
+          <div className="mt-4 flex items-center gap-2 text-xs font-bold text-neutral-600">
+            <span>Already reserved?</span>
+            <Link
+              href="/booking/lookup"
+              className="text-black underline underline-offset-4 hover:text-emerald-700 transition-colors"
+            >
+              Check your booking status & captain dispatch →
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -276,7 +369,10 @@ function BookingFormContent() {
                     onChange={(e) => {
                       setExperienceId(e.target.value);
                       const exp = EXPERIENCES.find((x) => x.id === e.target.value);
-                      if (exp) setTimeWindow(exp.popularWindow);
+                      if (exp) {
+                        setTimeWindow(exp.popularWindow);
+                        setAdultsCount((prev) => Math.min(exp.maxCapacity, Math.max(1, prev)));
+                      }
                     }}
                     className={selectCls()}
                   >
@@ -310,7 +406,9 @@ function BookingFormContent() {
                       onChange={(e) => setTimeWindow(e.target.value as TimeWindow)}
                       className={selectCls()}
                     >
-                      <option value="SUNRISE">Sunrise (5:45 AM – 8:15 AM)</option>
+                      {experience.boatType !== 'SPEEDBOAT' && (
+                        <option value="SUNRISE">Sunrise (5:45 AM – 8:15 AM)</option>
+                      )}
                       <option value="MORNING">Morning (8:30 AM – 11:30 AM)</option>
                       <option value="AFTERNOON">Afternoon (2:00 PM – 4:00 PM)</option>
                       <option value="SUNSET">Sunset (4:30 PM – 6:30 PM)</option>
@@ -320,7 +418,7 @@ function BookingFormContent() {
                 </Field>
               </div>
 
-              {/* Adults Counter */}
+              {/* Adults Counter with Dynamic Tier Badging */}
               <Field label="Number of Guests">
                 <div className="flex items-center justify-between rounded-2xl border border-neutral-200 bg-white px-5 py-4 shadow-xs">
                   <div>
@@ -328,7 +426,13 @@ function BookingFormContent() {
                       Adult Passengers
                     </span>
                     <span className="text-xs text-neutral-500">
-                      Vessel capacity: Up to {experience.maxCapacity} persons
+                      {experience.boatType === 'SHIKARA'
+                        ? quote.adultsCount <= 9
+                          ? `Standard Tier (1–9 Guests: ₹${experience.duration.includes('1') ? '1,200' : '2,000'})`
+                          : `Large Group Tier (10–15 Guests: ₹${experience.duration.includes('1') ? '1,400' : '2,400'})`
+                        : experience.boatType === 'KAYAK'
+                        ? `Per-person rate: ₹${experience.basePrice}/person (Max 8)`
+                        : `Flat boat rate: Up to ${experience.maxCapacity} persons`}
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
@@ -408,6 +512,22 @@ function BookingFormContent() {
 
               {/* Actions */}
               <div className="pt-4 space-y-4">
+                <p className="text-[11px] text-neutral-500 text-center leading-relaxed">
+                  By paying the token advance, you agree to our{' '}
+                  <Link href="/terms" target="_blank" className="text-neutral-900 underline font-semibold hover:text-black">
+                    Terms of Service
+                  </Link>
+                  ,{' '}
+                  <Link href="/privacy" target="_blank" className="text-neutral-900 underline font-semibold hover:text-black">
+                    Privacy Policy
+                  </Link>
+                  , and{' '}
+                  <Link href="/refund-policy" target="_blank" className="text-neutral-900 underline font-semibold hover:text-black">
+                    Refund Policy
+                  </Link>
+                  .
+                </p>
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -417,7 +537,7 @@ function BookingFormContent() {
                   <span>
                     {isSubmitting
                       ? 'Processing Reservation...'
-                      : `Pay 25% Token: ${formatINR(quote.tokenAdvance)}`}
+                      : `Pay Token: ${formatINR(quote.tokenAdvance)}`}
                   </span>
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </button>
@@ -441,18 +561,43 @@ function BookingFormContent() {
 
           {/* Fare Summary & Reassurance (Right Column) */}
           <div className="gsap-booking-summary lg:col-span-5 space-y-6">
-            <div className="rounded-3xl bg-neutral-50 border border-neutral-200/90 p-8 sm:p-10 shadow-xs">
-              <h3 className="text-xl font-black text-black pb-4 border-b border-neutral-200">
-                Fare Summary
-              </h3>
-
-              <div className="mt-6 space-y-3.5 text-xs sm:text-sm">
-                <div className="flex justify-between text-neutral-600">
-                  <span>Selected Tour:</span>
-                  <span className="font-bold text-black text-right">
-                    {experience.title}
-                  </span>
+            <div className="rounded-3xl bg-neutral-50 border border-neutral-200/90 overflow-hidden shadow-xs">
+              {/* Selected Vessel Visual Header */}
+              {BOATING_MEDIA[experience.id] && (
+                <div className="relative aspect-[16/8] w-full bg-neutral-900">
+                  <Image
+                    src={BOATING_MEDIA[experience.id].primaryImage}
+                    alt={experience.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 450px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-black/80 backdrop-blur-md text-white text-[9px] font-black uppercase tracking-wider px-3 py-1 rounded-full border border-white/10">
+                      {BOATING_MEDIA[experience.id].badge}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-3 left-4 right-4 text-white">
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-amber-300 block">
+                      {experience.boatType} • {experience.canalAccess ? 'Mangrove Channels' : 'Open Lake'}
+                    </span>
+                  </div>
                 </div>
+              )}
+
+              <div className="p-8 sm:p-10">
+                <h3 className="text-xl font-black text-black pb-4 border-b border-neutral-200">
+                  Fare Summary
+                </h3>
+
+                <div className="mt-6 space-y-3.5 text-xs sm:text-sm">
+                  <div className="flex justify-between text-neutral-600">
+                    <span>Selected Tour:</span>
+                    <span className="font-bold text-black text-right">
+                      {experience.title}
+                    </span>
+                  </div>
                 <div className="flex justify-between text-neutral-600">
                   <span>Duration:</span>
                   <span className="font-bold text-black">{experience.duration}</span>
@@ -478,16 +623,17 @@ function BookingFormContent() {
                 {/* Token Breakdown Box */}
                 <div className="rounded-2xl bg-black text-white p-5 space-y-2 mt-4">
                   <div className="flex justify-between font-black text-amber-300 text-xs uppercase tracking-wider">
-                    <span>25% Token Advance (Pay Now):</span>
+                    <span>Token Advance (Pay Now):</span>
                     <span>{formatINR(quote.tokenAdvance)}</span>
                   </div>
                   <div className="flex justify-between text-neutral-300 text-xs">
-                    <span>75% Jetty Balance (On Arrival):</span>
+                    <span>Jetty Balance (On Arrival):</span>
                     <span>{formatINR(quote.jettyBalance)}</span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
             {/* Reassurance Policy */}
             <div className="rounded-3xl bg-neutral-50 border border-neutral-200/90 p-8 text-xs space-y-3.5">
@@ -496,7 +642,7 @@ function BookingFormContent() {
               </h4>
               <div className="flex items-start gap-2.5 text-neutral-600 font-normal">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span>50% token refund if cancelled 24+ hours prior to departure.</span>
+                <span>100% token refund if cancelled 24+ hours prior to departure.</span>
               </div>
               <div className="flex items-start gap-2.5 text-neutral-600 font-normal">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
@@ -509,6 +655,18 @@ function BookingFormContent() {
             </div>
           </div>
         </div>
+
+        {/* Direct Dynamic UPI Payment Modal */}
+        {pendingBookingData && (
+          <UpiPaymentModal
+            isOpen={upiModalOpen}
+            onClose={() => setUpiModalOpen(false)}
+            bookingData={pendingBookingData}
+            onSuccess={(bNum) => {
+              router.push(`/booking/confirmation/${bNum}`);
+            }}
+          />
+        )}
       </div>
     </div>
   );

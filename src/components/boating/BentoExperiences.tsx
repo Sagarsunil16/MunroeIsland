@@ -52,7 +52,7 @@ export function BentoExperiences() {
           {/* Bottom Content */}
           <div className="relative z-10 pt-44 sm:pt-56 space-y-4">
             <h3 className="text-2xl sm:text-4xl font-display font-semibold text-white tracking-tight leading-snug">
-              Sunrise 2.5-Hour Wooden Canoe Voyage
+              Sunrise 2-Hour Wooden Canoe Voyage
             </h3>
             <p className="text-white/80 text-xs sm:text-sm leading-relaxed font-sans max-w-lg">
               Gliding through silent morning mist and mangrove arches at first light. Hand-paddled without engine noise by a veteran native punter.
@@ -62,15 +62,15 @@ export function BentoExperiences() {
               <div>
                 <span className="text-xs text-white/60 block font-sans">Starting Fare</span>
                 <span className="text-2xl font-bold font-sans text-amber">
-                  ₹1,600 <span className="text-xs font-normal text-white/70">/ couple (2.5h)</span>
+                  ₹1,200 <span className="text-xs font-normal text-white/70">/ boat (Up to 6 guests, 2h)</span>
                 </span>
                 <span className="text-[11px] text-terracotta-subtle block font-semibold">
-                  25% Token: ₹400 • Rest at Jetty
+                  Token: ₹400 • Rest at Pier
                 </span>
               </div>
 
               <Link
-                href="/booking?exp=sunrise-canoe"
+                href="/booking?exp=canoe-sunrise"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-terracotta hover:bg-terracotta-hover text-white text-xs font-bold uppercase tracking-wider shadow-glow transition-all active:scale-95"
               >
                 <span>Reserve Sunrise Slot</span>
@@ -87,7 +87,7 @@ export function BentoExperiences() {
               <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-light text-forest">
                 Family Favorite
               </span>
-              <span className="text-xs text-ink-muted">4–8 Guests</span>
+              <span className="text-xs text-ink-muted">Up to 15 Guests</span>
             </div>
 
             <h3 className="text-xl font-display font-semibold text-forest mb-2 group-hover:text-terracotta transition-colors">
@@ -101,10 +101,10 @@ export function BentoExperiences() {
           <div className="pt-4 border-t border-canvas-borderLight flex items-center justify-between">
             <div>
               <span className="text-[10px] text-ink-muted uppercase block">Starts From</span>
-              <span className="text-lg font-bold font-sans text-forest">₹2,000</span>
+              <span className="text-lg font-bold font-sans text-forest">₹1,200</span>
             </div>
             <Link
-              href="/booking?exp=shikara-cruise-2h"
+              href="/booking?exp=shikara-1h"
               className="h-10 w-10 rounded-full bg-forest text-white flex items-center justify-center hover:bg-terracotta transition-colors"
               aria-label="Book Shikara"
             >
@@ -120,7 +120,7 @@ export function BentoExperiences() {
               <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-lagoon-light text-lagoon">
                 Active Adventure
               </span>
-              <span className="text-xs text-ink-muted">Single / Tandem</span>
+              <span className="text-xs text-ink-muted">Up to 8 Paddlers</span>
             </div>
 
             <h3 className="text-xl font-display font-semibold text-forest mb-2 group-hover:text-terracotta transition-colors">
@@ -134,10 +134,10 @@ export function BentoExperiences() {
           <div className="pt-4 border-t border-canvas-borderLight flex items-center justify-between">
             <div>
               <span className="text-[10px] text-ink-muted uppercase block">Per Person</span>
-              <span className="text-lg font-bold font-sans text-forest">₹700</span>
+              <span className="text-lg font-bold font-sans text-forest">₹250</span>
             </div>
             <Link
-              href="/booking?exp=kayak-tour"
+              href="/booking?exp=kayak-1h"
               className="h-10 w-10 rounded-full bg-forest text-white flex items-center justify-center hover:bg-terracotta transition-colors"
               aria-label="Book Kayak"
             >
@@ -183,7 +183,7 @@ export function BentoExperiences() {
               <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-canvas-subtle text-forest">
                 Village Life
               </span>
-              <span className="text-xs text-ink-muted">2 Hours</span>
+              <span className="text-xs text-ink-muted">Up to 6 Guests</span>
             </div>
 
             <h3 className="text-xl font-display font-semibold text-forest mb-2 group-hover:text-terracotta transition-colors">
@@ -197,10 +197,10 @@ export function BentoExperiences() {
           <div className="pt-4 border-t border-canvas-borderLight flex items-center justify-between">
             <div>
               <span className="text-[10px] text-ink-muted uppercase block">Starts From</span>
-              <span className="text-lg font-bold font-sans text-forest">₹1,300</span>
+              <span className="text-lg font-bold font-sans text-forest">₹800</span>
             </div>
             <Link
-              href="/booking?exp=daytime-canoe"
+              href="/booking?exp=canoe-1h"
               className="h-10 w-10 rounded-full bg-forest text-white flex items-center justify-center hover:bg-terracotta transition-colors"
               aria-label="Book Daytime Canoe"
             >
