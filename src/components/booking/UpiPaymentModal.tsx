@@ -71,12 +71,29 @@ export function UpiPaymentModal({
     bookingNumber: bookingData.bookingNumber,
   });
 
-  const intentUrls = generateAppIntentUrls({
-    upiId,
-    merchantName,
-    amount: bookingData.tokenAdvance,
-    bookingNumber: bookingData.bookingNumber,
-  });
+  // Initialise with the safe universal URI — replaced on mount with the correct
+  // platform-specific URLs once navigator.userAgent is available client-side
+  const [intentUrls, setIntentUrls] = useState(() =>
+    generateAppIntentUrls({
+      upiId,
+      merchantName,
+      amount: bookingData.tokenAdvance,
+      bookingNumber: bookingData.bookingNumber,
+    })
+  );
+
+  // Re-generate on mount (client side) so iOS vs Android detection is accurate
+  useEffect(() => {
+    setIntentUrls(
+      generateAppIntentUrls({
+        upiId,
+        merchantName,
+        amount: bookingData.tokenAdvance,
+        bookingNumber: bookingData.bookingNumber,
+      })
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [upiId, merchantName, bookingData.tokenAdvance, bookingData.bookingNumber]);
 
   // Generate QR Code on mount or booking change
   useEffect(() => {

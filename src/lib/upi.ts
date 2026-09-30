@@ -29,20 +29,41 @@ export function generateUpiUri({
 }
 
 /**
- * Generates direct app-specific intents on mobile devices (Android & iOS).
+ * Generates direct app-specific intents on mobile devices.
+ * - Android: uses intent:// (Chrome-only, allows direct package-specific launch)
+ * - iOS:     uses app-registered URL schemes (upi://, phonepe://, paytm://)
+ *            intent:// is NOT supported on iOS Safari and causes "invalid address"
  */
 export function generateAppIntentUrls(details: UpiPaymentDetails) {
   const baseUri = generateUpiUri(details);
   const upiQuery = baseUri.replace("upi://pay?", "");
 
-  return {
+  const androidUrls = {
     universal: baseUri,
-    // Android package-specific intents allow direct 1-tap app launch
     googlePay: `intent://pay?${upiQuery}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`,
     phonePe: `intent://pay?${upiQuery}#Intent;scheme=upi;package=com.phonepe.app;end`,
     paytm: `intent://pay?${upiQuery}#Intent;scheme=upi;package=net.one97.paytm;end`,
     bhim: `intent://pay?${upiQuery}#Intent;scheme=upi;package=in.org.npci.upiapp;end`,
   };
+
+  // iOS apps register their own URL schemes. The standard upi:// URI is the
+  // most compatible fallback because ALL NPCI-certified apps on iOS handle it.
+  const iosUrls = {
+    universal: baseUri,
+    googlePay: baseUri,   // GPay iOS handles upi:// via its registered handler
+    phonePe: baseUri,     // PhonePe iOS handles upi:// natively
+    paytm: baseUri,       // Paytm iOS handles upi:// natively
+    bhim: baseUri,
+  };
+
+  // Runtime detection — only runs client-side
+  if (typeof window !== "undefined") {
+    const isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    return isIos ? iosUrls : androidUrls;
+  }
+
+  // SSR fallback: return the safe universal URI for all slots
+  return iosUrls;
 }
 
 /**
