@@ -1,16 +1,38 @@
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { FullBleedVideoHero } from '@/components/home/FullBleedVideoHero';
 import { VisitTheUSAExperiences } from '@/components/home/VisitTheUSAExperiences';
-import { InteractiveCanalRoute } from '@/components/home/InteractiveCanalRoute';
-import { VisitTheUSAStories } from '@/components/home/VisitTheUSAStories';
-import { MunroeStorytellingExperience } from '@/components/home/MunroeStorytellingExperience';
-import { InteractiveTripMatcher } from '@/components/home/InteractiveTripMatcher';
-import { CaptainsSpotlight } from '@/components/home/CaptainsSpotlight';
-import { VisitTheUSATripEssentials } from '@/components/home/VisitTheUSATripEssentials';
-import { AsanaComparisonMatrix } from '@/components/boating/AsanaComparisonMatrix';
-import { VisualGuestStories } from '@/components/home/VisualGuestStories';
-import { FaqAccordion } from '@/shared/components/animations/FaqAccordion';
 import { ArrowRight, Compass, ShieldCheck } from 'lucide-react';
+
+// Below-the-fold sections: code-split with dynamic import so they don't bloat
+// the initial JS bundle. Next.js App Router streams these on the server side.
+const InteractiveCanalRoute = dynamic(() =>
+  import('@/components/home/InteractiveCanalRoute').then((m) => ({ default: m.InteractiveCanalRoute }))
+);
+const VisitTheUSAStories = dynamic(() =>
+  import('@/components/home/VisitTheUSAStories').then((m) => ({ default: m.VisitTheUSAStories }))
+);
+const MunroeStorytellingExperience = dynamic(() =>
+  import('@/components/home/MunroeStorytellingExperience').then((m) => ({ default: m.MunroeStorytellingExperience }))
+);
+const InteractiveTripMatcher = dynamic(() =>
+  import('@/components/home/InteractiveTripMatcher').then((m) => ({ default: m.InteractiveTripMatcher }))
+);
+const CaptainsSpotlight = dynamic(() =>
+  import('@/components/home/CaptainsSpotlight').then((m) => ({ default: m.CaptainsSpotlight }))
+);
+const VisitTheUSATripEssentials = dynamic(() =>
+  import('@/components/home/VisitTheUSATripEssentials').then((m) => ({ default: m.VisitTheUSATripEssentials }))
+);
+const AsanaComparisonMatrix = dynamic(() =>
+  import('@/components/boating/AsanaComparisonMatrix').then((m) => ({ default: m.AsanaComparisonMatrix }))
+);
+const VisualGuestStories = dynamic(() =>
+  import('@/components/home/VisualGuestStories').then((m) => ({ default: m.VisualGuestStories }))
+);
+const FaqAccordion = dynamic(() =>
+  import('@/shared/components/animations/FaqAccordion').then((m) => ({ default: m.FaqAccordion }))
+);
 
 const munroeIslandFaqs = [
   {

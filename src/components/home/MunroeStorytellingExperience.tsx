@@ -85,13 +85,27 @@ export function MunroeStorytellingExperience() {
   const containerRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const isVisibleRef = useRef(false);
 
   const activeChapter = CHAPTERS[currentIdx];
 
-  // Autoplay progression
+  // Pause autoplay when section scrolled off-screen
+  useEffect(() => {
+    const section = containerRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0.1 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  // Autoplay progression — only while visible
   useEffect(() => {
     if (!isPlaying) return;
     const interval = setInterval(() => {
+      if (!isVisibleRef.current) return;
       setCurrentIdx((prev) => (prev + 1) % CHAPTERS.length);
     }, 6500);
     return () => clearInterval(interval);

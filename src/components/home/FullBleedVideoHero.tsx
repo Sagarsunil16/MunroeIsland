@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Play, Pause, Volume2, VolumeX, ArrowDown, Calendar, Users, Clock, ArrowRight, Compass } from 'lucide-react';
@@ -8,14 +8,56 @@ import { Play, Pause, Volume2, VolumeX, ArrowDown, Calendar, Users, Clock, Arrow
 export function FullBleedVideoHero() {
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const [date, setDate] = useState(
     new Date(Date.now() + 86400000).toISOString().split('T')[0]
   );
   const [slot, setSlot] = useState('SUNRISE');
   const [pax, setPax] = useState('2');
+
+  // Lazy-load video only when hero section is visible in the viewport
+  useEffect(() => {
+    const section = sectionRef.current;
+    const video = videoRef.current;
+    if (!section || !video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Inject the video source only once, then start playing
+            if (!videoLoaded) {
+              const source = video.querySelector('source[data-src]');
+              if (source) {
+                const dataSrc = source.getAttribute('data-src');
+                if (dataSrc) {
+                  source.setAttribute('src', dataSrc);
+                  source.removeAttribute('data-src');
+                  video.load();
+                  video.play().catch(() => {/* autoplay blocked, user can press play */});
+                  setVideoLoaded(true);
+                }
+              }
+            } else {
+              video.play().catch(() => {});
+            }
+          } else {
+            // Pause when scrolled off screen — saves CPU/battery
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -40,19 +82,20 @@ export function FullBleedVideoHero() {
   };
 
   return (
-    <section className="relative w-full min-h-[90vh] lg:min-h-screen flex flex-col justify-between overflow-hidden bg-black text-white">
+    <section ref={sectionRef} className="relative w-full min-h-[90vh] lg:min-h-screen flex flex-col justify-between overflow-hidden bg-black text-white">
       {/* ── Background Full-Bleed Video ── */}
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
-          autoPlay
           loop
           muted={isMuted}
           playsInline
+          preload="none"
           poster="/images/munroe island.jpg"
           className="w-full h-full object-cover scale-105 transition-transform duration-1000"
         >
-          <source src="/videos/munroe-canal-boating.mp4" type="video/mp4" />
+          {/* src is injected by IntersectionObserver — prevents eager 7.9 MB fetch */}
+          <source data-src="/videos/munroe-canal-boating.mp4" type="video/mp4" />
         </video>
 
         {/* VisitTheUSA Style Cinematic Multi-Stop Gradient */}

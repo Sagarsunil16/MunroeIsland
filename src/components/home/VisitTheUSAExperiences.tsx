@@ -20,14 +20,28 @@ export function VisitTheUSAExperiences() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const isInteractingRef = useRef(false);
   const interactionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isVisibleRef = useRef(false);
 
   const filteredExperiences = EXPERIENCES.filter((exp) => {
     if (activeCategory === 'all') return true;
     const media = BOATING_MEDIA[exp.id];
     return media?.category === activeCategory;
   });
+
+  // Pause auto-scroll when section is not visible
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0.1 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   // Scroll to a specific card index
   const scrollToIndex = useCallback((index: number) => {
@@ -83,13 +97,14 @@ export function VisitTheUSAExperiences() {
     setCurrentIndex(closestIndex);
   }, []);
 
-  // Automatic horizontal scroll loop
+  // Automatic horizontal scroll loop — only runs when section is visible
   useEffect(() => {
     const total = filteredExperiences.length;
     if (total <= 1) return;
 
     const interval = setInterval(() => {
       if (isInteractingRef.current) return;
+      if (!isVisibleRef.current) return;
       if (!scrollContainerRef.current) return;
 
       // Only auto-scroll when in horizontal scroll mode (mobile viewport)
@@ -108,7 +123,7 @@ export function VisitTheUSAExperiences() {
   }, [filteredExperiences.length, scrollToIndex]);
 
   return (
-    <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-white" id="experiences">
+    <section ref={sectionRef} className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-white" id="experiences">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">

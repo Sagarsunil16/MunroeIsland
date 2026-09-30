@@ -44,6 +44,19 @@ export function VisitTheUSAStories() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const isInteractingRef = useRef(false);
   const interactionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isVisibleRef = useRef(false);
+
+  // Pause when section is off-screen
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0.1 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   // Scroll to index
   const scrollToIndex = useCallback((index: number) => {
@@ -96,13 +109,14 @@ export function VisitTheUSAStories() {
     setCurrentIndex(closestIndex);
   }, []);
 
-  // Auto-scroll loop on mobile
+  // Auto-scroll loop on mobile — only when section is visible
   useEffect(() => {
     const total = STORIES.length;
     if (total <= 1) return;
 
     const interval = setInterval(() => {
       if (isInteractingRef.current) return;
+      if (!isVisibleRef.current) return;
       if (!scrollContainerRef.current) return;
 
       if (scrollContainerRef.current.scrollWidth <= scrollContainerRef.current.clientWidth) {

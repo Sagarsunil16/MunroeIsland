@@ -4,7 +4,7 @@ import { GUIDES } from "@/lib/guides";
 export const revalidate = 86400; // 24 hours
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://munroe-island.in";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.munroe-island.in";
   const now = new Date();
 
   const guideUrls: MetadataRoute.Sitemap = GUIDES.map((guide) => ({
