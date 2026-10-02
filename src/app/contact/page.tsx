@@ -227,7 +227,7 @@ export default function ContactPage() {
             <div className="pt-4 border-t border-neutral-200">
               <a
                 ref={whatsappBtnRef}
-                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello Visit Munroe Island! I need directions and assistance for our visit.")}`}
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello! I need directions and assistance for our Munroe Island boating trip.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-black hover:bg-neutral-800 text-white font-black text-xs uppercase tracking-[0.18em] py-4 px-8 shadow-md hover:shadow-2xl transition-all duration-300 active:scale-98"

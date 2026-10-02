@@ -198,7 +198,7 @@ function BookingFormContent() {
             key: razorpayKey,
             amount: Math.round(quote.tokenAdvance * 100), // paise
             currency: 'INR',
-            name: 'Visit Munroe Island',
+            name: 'Munroe Island Waterways',
             description: `Token Advance: ${quote.experienceTitle}`,
             order_id: data.razorpayOrderId,
             prefill: {

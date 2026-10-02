@@ -246,9 +246,9 @@ export default function RootLayout({
         <div className="flex-grow">{children}</div>
         <Footer />
 
-        {/* Floating WhatsApp Action with VisitTheUSA High-Contrast Styling */}
+        {/* Floating WhatsApp Action with High-Contrast Styling */}
         <a
-          href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello Visit Munroe Island! I am interested in checking canoe and boat availability.")}`}
+          href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello! I am interested in checking Munroe Island canoe and boat availability.")}`}
           target="_blank"
           rel="noopener noreferrer"
           className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-black hover:bg-neutral-800 text-white pl-3.5 pr-5 py-3 shadow-2xl shadow-black/50 hover:shadow-black/70 hover:scale-105 active:scale-95 transition-all duration-300 border border-neutral-700/80 group"
