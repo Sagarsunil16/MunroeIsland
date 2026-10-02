@@ -103,6 +103,24 @@ const planningGuides = [
     tag: 'CLIMATE & TIDES',
     description: 'Understand tide clearances for low bridges, bird migration seasons, and monsoon tips.',
   },
+  {
+    href: '/guides/munroe-island-vs-alleppey-backwaters-which-is-better',
+    title: 'Munroe Island vs Alleppey',
+    tag: 'COMPARISON',
+    description: 'Quiet canoe tunnels or luxury houseboats? An honest comparison to help you decide.',
+  },
+  {
+    href: '/guides/munroe-island-sunrise-boating-ultimate-guide',
+    title: 'Sunrise Boating Guide',
+    tag: 'MUST-READ',
+    description: 'Why the 5:45 AM canoe slot is legendary — what to expect, bring, and photograph.',
+  },
+  {
+    href: '/guides/why-munroe-island-is-sinking-ecology-guide',
+    title: 'Why Is Munroe Island Sinking?',
+    tag: 'ECOLOGY',
+    description: 'The true story of the sinking island: tides, dams, and why responsible tourism matters.',
+  },
 ];
 
 export default function HomePage() {
@@ -179,7 +197,7 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {planningGuides.map((guide, idx) => (
                 <Link
                   key={idx}

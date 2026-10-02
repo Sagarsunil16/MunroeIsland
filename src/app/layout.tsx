@@ -11,20 +11,50 @@ export const metadata: Metadata = {
     template: "%s | Munroe Island Boating",
   },
   description:
-    "Experience Kerala's quietest backwater archipelago. Official hand-paddled sunrise wooden canoes (from ₹800), shaded family shikara cruises (from ₹1,200), and kayak expeditions through narrow mangrove tunnels in Munroe Island (Munroethuruthu), Kollam.",
+    "Book official Munroe Island boating — hand-paddled sunrise wooden canoe tours from ₹800, shaded family shikara cruises from ₹1,200, and guided kayak expeditions (₹250/hr) through narrow mangrove tunnels. Munroe Island (Munroethuruthu), Kollam, Kerala. Online token booking, transparent charges, licensed native boatmen.",
   keywords: [
+    // Core brand & destination
     "Munroe Island",
     "Munroe Island Boating",
-    "Munroe Island Boating Charges",
-    "Munroe Island Canoe Tour",
+    "Munroe Island Kerala",
+    "Munroethuruthu",
     "Munroethuruthu Boating",
+    "Munroturuttu",
+    // Common misspellings & variations (critical for capture)
+    "Mundro Island Boating",
+    "Monroe Island Kerala",
+    "Mundrothuruthu Boating",
+    "Munroe Thuruthu",
+    // High-volume commercial queries
+    "Munroe Island Boating Charges",
+    "Munroe Island Boating Price",
+    "Munroe Island Boating Timings",
+    "Munroe Island Boating Online Booking",
+    "Munroe Island Boating Contact Number",
+    "Munroe Island Canoe Ride",
+    "Munroe Island Canoe Tour",
     "Munroe Island Shikara Ride",
-    "Munroe Island Sunrise Boat",
     "Munroe Island Kayaking",
-    "Kerala Backwaters Canoe Tour",
-    "Kollam Tourism Boating",
     "Munroe Island Boat Booking",
+    "Munroe Island Sunrise Boating",
+    // Activity & experience terms
+    "Munroe Island Mangrove Tunnel Canoe",
+    "Munroe Island Backwaters",
+    "Munroe Island Sunset Cruise",
+    // Comparison & decision terms
+    "Munroe Island vs Alleppey",
+    "Offbeat Kerala Backwaters",
+    // Geographic & regional terms
+    "Kollam Backwaters Boating",
+    "Ashtamudi Lake Boating",
+    "Kollam Tourism Boating",
+    "Kerala Canoe Tour",
+    "Kerala Backwaters Canoe Tour",
+    // Logistics queries
+    "How to Reach Munroe Island",
     "Munroe Island Timings and Rates",
+    "Best Time to Visit Munroe Island",
+    "Munroe Island One Day Trip",
   ],
   authors: [{ name: "Munroe Island Waterways Expeditions" }],
   creator: "munroe-island.in",
@@ -90,7 +120,7 @@ export default function RootLayout({
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
 
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         <GoogleAnalytics />
         <link
@@ -108,7 +138,17 @@ export default function RootLayout({
                   "@type": "TouristAttraction",
                   "@id": "https://www.munroe-island.in/#attraction",
                   name: "Munroe Island",
-                  alternateName: ["Munrothuruthu", "Mundrothuruth", "Munroturuttu"],
+                  alternateName: [
+                    "Munrothuruthu",
+                    "Mundrothuruth",
+                    "Munroturuttu",
+                    "Mundro Island",
+                    "Monroe Island",
+                    "Munroe Thuruthu",
+                    "Mundrothuruthu",
+                    "മൺറോ തുരുത്ത്",
+                    "मुनरो आइलैंड",
+                  ],
                   description:
                     "A cluster of eight scenic islands located at the confluence of Ashtamudi Lake and the Kallada River in Kollam, Kerala, renowned for its narrow mangrove canal canoe rides and traditional village life.",
                   geo: {
