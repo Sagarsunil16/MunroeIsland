@@ -1,8 +1,25 @@
+import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { FullBleedVideoHero } from '@/components/home/FullBleedVideoHero';
 import { VisitTheUSAExperiences } from '@/components/home/VisitTheUSAExperiences';
 import { ArrowRight, Compass, ShieldCheck } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Munroe Island Boating | Official Canoe Tours, Shikara & Kayaking Kerala',
+  description:
+    'Experience sunrise wooden canoe tours (from ₹800) and shaded family shikara cruises (from ₹1,200) through narrow mangrove tunnels in Munroe Island (Munroethuruthu), Kollam. Official token booking.',
+  alternates: {
+    canonical: 'https://www.munroe-island.in',
+  },
+  openGraph: {
+    title: 'Munroe Island Boating | Official Sunrise Canoe & Shikara Tours',
+    description:
+      'Silent mangrove canals, authentic wooden canoes, and transparent token advance booking with licensed native boatmen on Munroe Island.',
+    url: 'https://www.munroe-island.in',
+    type: 'website',
+  },
+};
 
 // Below-the-fold sections: code-split with dynamic import so they don't bloat
 // the initial JS bundle. Next.js App Router streams these on the server side.

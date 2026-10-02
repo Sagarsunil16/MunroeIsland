@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Terms of Service & Platform Policy | Munroe Island Waterways',
   description:
     'Legal terms, intermediary safe-harbor disclosures, passenger conduct, and limitation of liability for Munroe Island boat bookings.',
+  alternates: {
+    canonical: 'https://www.munroe-island.in/terms',
+  },
 };
 
 export default function TermsPage() {

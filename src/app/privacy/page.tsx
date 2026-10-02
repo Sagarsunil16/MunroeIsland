@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | Munroe Island Waterway Expeditions',
   description:
     'Our privacy practices, data protection principles, and payment security.',
+  alternates: {
+    canonical: 'https://www.munroe-island.in/privacy',
+  },
 };
 
 export default function PrivacyPage() {

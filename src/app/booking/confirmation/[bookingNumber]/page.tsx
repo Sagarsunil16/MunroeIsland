@@ -1,9 +1,18 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CheckCircle2, MessageSquare, ArrowLeft, ArrowRight, Clock, Users, Calendar, MapPin, IndianRupee, AlertCircle } from 'lucide-react';
 import { getBookingByNumber, StoredBooking } from '@/lib/bookings-store';
 import { prisma } from '@/lib/prisma';
 import { formatINR } from '@/lib/utils';
 import { AddToCalendarButton } from '@/components/booking/AddToCalendarButton';
+
+export const metadata: Metadata = {
+  title: 'Booking Confirmation | Munroe Island Waterways',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 interface ConfirmationPageProps {
   params: Promise<{

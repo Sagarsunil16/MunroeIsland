@@ -2,9 +2,19 @@ import { BoatingViewClient } from '@/components/boating/BoatingViewClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Munroe Island Experiences & Boating Tours | Official Fares',
+  title: 'Munroe Island Experiences & Boating Tours | Official Fares & Timings',
   description:
-    'Explore hand-carved wooden canoe tours, shaded family shikaras, and backwater kayaking in Munroe Island. Compare rates and reserve with an upfront token.',
+    'Explore hand-carved wooden canoe tours (from ₹800), shaded family shikaras (from ₹1,200), and backwater kayaking in Munroe Island. Compare rates and reserve with an upfront token.',
+  alternates: {
+    canonical: 'https://www.munroe-island.in/experiences',
+  },
+  openGraph: {
+    title: 'Munroe Island Boating Experiences & Official Fares',
+    description:
+      'Compare sunrise canoe rates, shaded family shikaras, and kayaking in Munroe Island backwaters. Transparent token reservation.',
+    url: 'https://www.munroe-island.in/experiences',
+    type: 'website',
+  },
 };
 
 const boatingFaqs = [
@@ -27,5 +37,44 @@ const boatingFaqs = [
 ];
 
 export default function ExperiencesPage() {
-  return <BoatingViewClient faqs={boatingFaqs} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                  {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Home',
+                    item: 'https://www.munroe-island.in',
+                  },
+                  {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Experiences',
+                    item: 'https://www.munroe-island.in/experiences',
+                  },
+                ],
+              },
+              {
+                '@type': 'FAQPage',
+                mainEntity: boatingFaqs.map(({ q, a }) => ({
+                  '@type': 'Question',
+                  name: q,
+                  acceptedAnswer: { '@type': 'Answer', text: a },
+                })),
+              },
+            ],
+          }),
+        }}
+      />
+      <BoatingViewClient faqs={boatingFaqs} />
+    </>
+  );
 }

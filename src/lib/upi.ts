@@ -56,14 +56,14 @@ export function generateAppIntentUrls(details: UpiPaymentDetails) {
     bhim: baseUri,
   };
 
-  // Runtime detection — only runs client-side
-  if (typeof window !== "undefined") {
+  // Runtime detection — only runs client-side on iOS devices
+  if (typeof window !== "undefined" && typeof navigator !== "undefined") {
     const isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    return isIos ? iosUrls : androidUrls;
+    if (isIos) return iosUrls;
   }
 
-  // SSR fallback: return the safe universal URI for all slots
-  return iosUrls;
+  // Default intent format for Android and universal clients
+  return androidUrls;
 }
 
 /**

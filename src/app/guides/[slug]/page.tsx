@@ -26,18 +26,35 @@ export async function generateMetadata({
     return { title: 'Guide Not Found' };
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.munroe-island.in';
+  const pageUrl = `${siteUrl}/guides/${guide.slug}`;
+
   return {
     title: guide.metaTitle,
     description: guide.metaDescription,
     alternates: {
-      canonical: `https://munroe-island.in/guides/${guide.slug}`,
+      canonical: pageUrl,
     },
     openGraph: {
       title: guide.metaTitle,
       description: guide.metaDescription,
-      url: `https://munroe-island.in/guides/${guide.slug}`,
+      url: pageUrl,
       type: 'article',
       publishedTime: guide.publishedDate,
+      images: [
+        {
+          url: '/images/canoe.jpeg',
+          width: 1200,
+          height: 630,
+          alt: guide.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: guide.metaTitle,
+      description: guide.metaDescription,
+      images: ['/images/canoe.jpeg'],
     },
   };
 }
@@ -52,29 +69,77 @@ export default async function GuideDetailPage({
     notFound();
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.munroe-island.in';
+  const pageUrl = `${siteUrl}/guides/${guide.slug}`;
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
+
+  // Build JSON-LD graph with Article, Breadcrumbs, and FAQs
+  const schemaGraph: any[] = [
+    {
+      '@type': 'Article',
+      headline: guide.title,
+      description: guide.metaDescription,
+      datePublished: guide.publishedDate,
+      mainEntityOfPage: pageUrl,
+      image: `${siteUrl}/images/canoe.jpeg`,
+      author: {
+        '@type': 'Organization',
+        name: 'Munroe Island Waterways Expeditions',
+        url: siteUrl,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Munroe Island Waterways',
+        url: siteUrl,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: siteUrl,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Travel Guides',
+          item: `${siteUrl}/guides`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: guide.title,
+          item: pageUrl,
+        },
+      ],
+    },
+  ];
+
+  if (guide.faq && guide.faq.length > 0) {
+    schemaGraph.push({
+      '@type': 'FAQPage',
+      mainEntity: guide.faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    });
+  }
 
   return (
     <>
-      {/* Schema.org Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: guide.title,
-            description: guide.metaDescription,
-            datePublished: guide.publishedDate,
-            mainEntityOfPage: `https://munroe-island.in/guides/${guide.slug}`,
-            author: {
-              '@type': 'Organization',
-              name: 'Explore Munroe Island',
-            },
-            publisher: {
-              '@type': 'Organization',
-              name: 'munroe-island.in',
-            },
+            '@graph': schemaGraph,
           }),
         }}
       />

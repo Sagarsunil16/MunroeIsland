@@ -5,6 +5,16 @@ export const metadata: Metadata = {
   title: 'Munroe Island Boating Charges, Timings & Canoe Tour Booking',
   description:
     'Compare Munroe Island boating charges starting from ₹800 for canoe tours and ₹1,200 for covered shikaras. Check sunrise timings and reserve with an upfront token.',
+  alternates: {
+    canonical: 'https://www.munroe-island.in/boating',
+  },
+  openGraph: {
+    title: 'Munroe Island Boating Charges, Timings & Booking',
+    description:
+      'Official boating charges for traditional canoes and shikaras on Munroe Island. Lock in morning slots with token advance.',
+    url: 'https://www.munroe-island.in/boating',
+    type: 'website',
+  },
 };
 
 const boatingFaqs = [
@@ -27,5 +37,44 @@ const boatingFaqs = [
 ];
 
 export default function BoatingPage() {
-  return <BoatingViewClient faqs={boatingFaqs} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                  {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Home',
+                    item: 'https://www.munroe-island.in',
+                  },
+                  {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Boating',
+                    item: 'https://www.munroe-island.in/boating',
+                  },
+                ],
+              },
+              {
+                '@type': 'FAQPage',
+                mainEntity: boatingFaqs.map(({ q, a }) => ({
+                  '@type': 'Question',
+                  name: q,
+                  acceptedAnswer: { '@type': 'Answer', text: a },
+                })),
+              },
+            ],
+          }),
+        }}
+      />
+      <BoatingViewClient faqs={boatingFaqs} />
+    </>
+  );
 }

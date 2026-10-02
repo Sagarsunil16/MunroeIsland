@@ -5,37 +5,69 @@ import { Footer } from "@/shared/components/layout/Footer";
 import { GoogleAnalytics } from "@/shared/components/analytics/GoogleAnalytics";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://munroe-island.in"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.munroe-island.in"),
   title: {
-    default: "Munroe Waterways | Hand-Paddled Canoe & Backwater Expeditions Kerala",
-    template: "%s | Munroe Waterways",
+    default: "Munroe Island Boating | Official Canoe, Shikara & Kayak Tours Kerala",
+    template: "%s | Munroe Island Boating",
   },
   description:
-    "Experience Kerala's quietest archipelago. Hand-paddled sunrise wooden canoes, shaded family shikara cruises, and kayak expeditions through narrow mangrove tunnels in Munroe Island, Kollam.",
+    "Experience Kerala's quietest backwater archipelago. Official hand-paddled sunrise wooden canoes (from ₹800), shaded family shikara cruises (from ₹1,200), and kayak expeditions through narrow mangrove tunnels in Munroe Island (Munroethuruthu), Kollam.",
   keywords: [
     "Munroe Island",
     "Munroe Island Boating",
+    "Munroe Island Boating Charges",
     "Munroe Island Canoe Tour",
     "Munroethuruthu Boating",
     "Munroe Island Shikara Ride",
     "Munroe Island Sunrise Boat",
-    "Kerala Backwaters Canoe",
+    "Munroe Island Kayaking",
+    "Kerala Backwaters Canoe Tour",
     "Kollam Tourism Boating",
+    "Munroe Island Boat Booking",
+    "Munroe Island Timings and Rates",
   ],
-  authors: [{ name: "Munroe Waterways Expeditions" }],
+  authors: [{ name: "Munroe Island Waterways Expeditions" }],
   creator: "munroe-island.in",
+  alternates: {
+    canonical: "/",
+  },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   openGraph: {
-    title: "Munroe Waterways | Hand-Paddled Canoe & Backwater Expeditions",
+    title: "Munroe Island Boating | Official Canoe, Shikara & Kayak Tours",
     description:
-      "Silent mangrove canals, authentic wooden canoes, and transparent token advance booking with native boatmen.",
-    url: "https://munroe-island.in",
-    siteName: "Munroe Waterways",
+      "Silent mangrove canals, authentic hand-paddled wooden canoes, shaded family shikaras, and transparent token advance booking with licensed native boatmen.",
+    url: "https://www.munroe-island.in",
+    siteName: "Munroe Island Waterways",
     locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: "/images/canoe.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Traditional wooden canoe paddling through Munroe Island mangrove canal arches",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Munroe Island Boating | Official Canoe & Shikara Tours Kerala",
+    description:
+      "Sunrise wooden canoe tours, shaded family shikaras, and mangrove kayaking in Munroe Island. Transparent rates and instant token reservation.",
+    images: ["/images/canoe.jpeg"],
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   icons: {
     icon: [
@@ -71,24 +103,100 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "TouristAttraction",
-              name: "Munroe Island",
-              alternateName: ["Munrothuruthu", "Mundrothuruth", "Munroturuttu"],
-              description:
-                "A cluster of eight scenic islands located at the confluence of Ashtamudi Lake and the Kallada River in Kollam, Kerala, renowned for its narrow mangrove canal canoe rides and traditional village life.",
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: 8.995,
-                longitude: 76.6119,
-              },
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Munroe Island, Kollam",
-                addressRegion: "Kerala",
-                addressCountry: "IN",
-              },
-              touristType: ["Eco-tourism", "Backwater tourism", "Nature tourism"],
-              isAccessibleForFree: true,
+              "@graph": [
+                {
+                  "@type": "TouristAttraction",
+                  "@id": "https://www.munroe-island.in/#attraction",
+                  name: "Munroe Island",
+                  alternateName: ["Munrothuruthu", "Mundrothuruth", "Munroturuttu"],
+                  description:
+                    "A cluster of eight scenic islands located at the confluence of Ashtamudi Lake and the Kallada River in Kollam, Kerala, renowned for its narrow mangrove canal canoe rides and traditional village life.",
+                  geo: {
+                    "@type": "GeoCoordinates",
+                    latitude: 8.995,
+                    longitude: 76.6119,
+                  },
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Munroe Island, Kollam",
+                    addressRegion: "Kerala",
+                    postalCode: "691502",
+                    addressCountry: "IN",
+                  },
+                  touristType: ["Eco-tourism", "Backwater tourism", "Nature tourism"],
+                  isAccessibleForFree: true,
+                },
+                {
+                  "@type": "TravelAgency",
+                  "@id": "https://www.munroe-island.in/#agency",
+                  name: "Munroe Island Waterways Expeditions",
+                  url: "https://www.munroe-island.in",
+                  telephone: "+919061710075",
+                  email: "munroeisland2@gmail.com",
+                  image: "https://www.munroe-island.in/images/canoe.jpeg",
+                  priceRange: "₹250 - ₹2400",
+                  currenciesAccepted: "INR",
+                  paymentAccepted: "UPI, Cash",
+                  openingHours: "Mo-Su 05:30-18:30",
+                  areaServed: [
+                    {
+                      "@type": "AdministrativeArea",
+                      name: "Munroe Island, Kollam District, Kerala",
+                    },
+                  ],
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Munroethuruthu",
+                    addressRegion: "Kerala",
+                    postalCode: "691502",
+                    addressCountry: "IN",
+                  },
+                  geo: {
+                    "@type": "GeoCoordinates",
+                    latitude: 8.995,
+                    longitude: 76.6119,
+                  },
+                  hasOfferCatalog: {
+                    "@type": "OfferCatalog",
+                    name: "Munroe Island Boating Services",
+                    itemListElement: [
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Sunrise Wooden Canoe Tour",
+                          description:
+                            "Hand-paddled traditional wooden canoe through narrow mangrove tunnels and low canal bridges.",
+                        },
+                        price: "800",
+                        priceCurrency: "INR",
+                      },
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Covered Family Shikara Cruise",
+                          description:
+                            "Shaded comfortable boat tour through Ashtamudi backwaters for families and groups.",
+                        },
+                        price: "1200",
+                        priceCurrency: "INR",
+                      },
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Guided Backwater Kayaking Safari",
+                          description:
+                            "Self-guided or escorted kayak excursion through tranquil mangrove creeks.",
+                        },
+                        price: "250",
+                        priceCurrency: "INR",
+                      },
+                    ],
+                  },
+                },
+              ],
             }),
           }}
         />

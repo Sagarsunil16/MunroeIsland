@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Cancellation & Refund Policy | Munroe Island Waterway Expeditions',
   description:
     'Clear guidelines on booking cancellations, weather rescheduling, 100% weather refunds, and prompt refund processing.',
+  alternates: {
+    canonical: 'https://www.munroe-island.in/refund-policy',
+  },
 };
 
 export default function RefundPolicyPage() {
