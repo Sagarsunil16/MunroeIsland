@@ -6,14 +6,14 @@ import { VisitTheUSAExperiences } from '@/components/home/VisitTheUSAExperiences
 import { ArrowRight, Compass, ShieldCheck } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Munroe Island Boating | Official Canoe Tours, Shikara & Kayaking Kerala',
+  title: 'Munroe Island | Backwater Canoe Tours, Shikara & Kayaking Kerala',
   description:
-    'Experience sunrise wooden canoe tours (from ₹800) and shaded family shikara cruises (from ₹1,200) through narrow mangrove tunnels in Munroe Island (Munroethuruthu), Kollam. Official token booking.',
+    'Experience sunrise wooden canoe tours (from ₹800) and shaded family shikara cruises (from ₹1,200) through narrow mangrove tunnels in Munroe Island (Munroethuruthu), Kollam. Advance token booking.',
   alternates: {
     canonical: 'https://www.munroe-island.in',
   },
   openGraph: {
-    title: 'Munroe Island Boating | Official Sunrise Canoe & Shikara Tours',
+    title: 'Munroe Island | Sunrise Canoe & Shikara Tours',
     description:
       'Silent mangrove canals, authentic wooden canoes, and transparent token advance booking with licensed native boatmen on Munroe Island.',
     url: 'https://www.munroe-island.in',

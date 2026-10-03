@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Munroe Island Boating Charges, Timings & Booking',
     description:
-      'Official boating charges for traditional canoes and shikaras on Munroe Island. Lock in morning slots with token advance.',
+      'Standard boating charges for traditional canoes and shikaras on Munroe Island. Lock in morning slots with token advance.',
     url: 'https://www.munroe-island.in/boating',
     type: 'website',
   },

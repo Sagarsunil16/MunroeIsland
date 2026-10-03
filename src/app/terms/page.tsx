@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Scale, CheckCircle2, ArrowLeft, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service & Platform Policy | Munroe Island Waterways',
+  title: 'Terms of Service & Platform Policy | Munroe Island',
   description:
     'Legal terms, intermediary safe-harbor disclosures, passenger conduct, and limitation of liability for Munroe Island boat bookings.',
   alternates: {

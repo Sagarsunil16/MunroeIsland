@@ -13,7 +13,7 @@ export function Footer() {
           <div className="col-span-2 space-y-5">
             <Logo inverted={true} />
             <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-sm font-normal">
-              The official destination travel platform for Munroe Island (Munroethuruthu), Kerala. Direct native captain assignments, standardized jetty pricing, and upfront online token reservations.
+              Backwater travel and booking platform for Munroe Island (Munroethuruthu), Kerala. Direct native captain assignments, standardized jetty pricing, and upfront online token reservations.
             </p>
             <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 pt-1">
               <ShieldCheck className="h-4 w-4" />
@@ -122,7 +122,7 @@ export function Footer() {
 
         {/* Bottom Strip (Mandatory Payment Gateway & Legal Compliance Links) */}
         <div className="pt-8 border-t border-neutral-900 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
-          <p>© {new Date().getFullYear()} Munroe Island Expeditions. All rights reserved. Technology Facilitator.</p>
+          <p>© {new Date().getFullYear()} Munroe Island (munroe-island.in). All rights reserved. Technology Facilitator.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-wider font-bold">
             <Link href="/terms" className="hover:text-amber-300 transition-colors">
               Terms of Service

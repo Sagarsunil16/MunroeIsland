@@ -16,14 +16,14 @@ const TIME_WINDOW_LABELS: Record<TimeWindow, string> = {
   SUNSET: "Sunset (04:30 PM - 06:30 PM)",
 };
 
-export const OFFICIAL_WHATSAPP_NUMBER =
+export const WHATSAPP_DISPATCH_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919061710075";
 
 /**
  * Builds a direct WhatsApp chat URL with a structured, pre-filled booking inquiry message.
  */
 export function buildWhatsAppInquiryUrl(params: WhatsAppInquiryParams): string {
-  const whatsappNumber = OFFICIAL_WHATSAPP_NUMBER;
+  const whatsappNumber = WHATSAPP_DISPATCH_NUMBER;
 
   const lines = [
     "🛶 *Munroe Island Boating Inquiry*",

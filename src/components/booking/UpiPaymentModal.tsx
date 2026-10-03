@@ -61,12 +61,11 @@ export function UpiPaymentModal({
   const isVerifying = verificationState === 'verifying';
 
   const upiId = process.env.NEXT_PUBLIC_UPI_ID || '';
-  const merchantName =
-    process.env.NEXT_PUBLIC_UPI_NAME || 'Munroe Island Waterways';
+  const payeeName = process.env.NEXT_PUBLIC_UPI_NAME || '';
 
   const upiUri = generateUpiUri({
     upiId,
-    merchantName,
+    payeeName,
     amount: bookingData.tokenAdvance,
     bookingNumber: bookingData.bookingNumber,
   });
@@ -76,7 +75,7 @@ export function UpiPaymentModal({
   const [intentUrls, setIntentUrls] = useState(() =>
     generateAppIntentUrls({
       upiId,
-      merchantName,
+      payeeName,
       amount: bookingData.tokenAdvance,
       bookingNumber: bookingData.bookingNumber,
     })
@@ -87,13 +86,13 @@ export function UpiPaymentModal({
     setIntentUrls(
       generateAppIntentUrls({
         upiId,
-        merchantName,
+        payeeName,
         amount: bookingData.tokenAdvance,
         bookingNumber: bookingData.bookingNumber,
       })
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [upiId, merchantName, bookingData.tokenAdvance, bookingData.bookingNumber]);
+  }, [upiId, payeeName, bookingData.tokenAdvance, bookingData.bookingNumber]);
 
   // Generate QR Code on mount or booking change
   useEffect(() => {
@@ -287,7 +286,7 @@ export function UpiPaymentModal({
 
                 <p className="text-xs font-bold text-neutral-700 inline-flex items-center gap-2">
                   <Loader2 className="w-3.5 h-3.5 animate-spin text-emerald-600" />
-                  <span>Opening your official Boarding Pass...</span>
+                  <span>Opening your Boarding Pass...</span>
                 </p>
               </div>
             )}

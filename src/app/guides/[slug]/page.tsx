@@ -84,12 +84,12 @@ export default async function GuideDetailPage({
       image: `${siteUrl}/images/canoe.jpeg`,
       author: {
         '@type': 'Organization',
-        name: 'Munroe Island Waterways Expeditions',
+        name: 'Munroe Island',
         url: siteUrl,
       },
       publisher: {
         '@type': 'Organization',
-        name: 'Munroe Island Waterways',
+        name: 'Munroe Island',
         url: siteUrl,
       },
     },

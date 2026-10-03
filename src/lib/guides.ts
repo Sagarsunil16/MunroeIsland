@@ -20,16 +20,16 @@ export const GUIDES: GuideArticle[] = [
   {
     slug: "munroe-island-boating-rates-timings",
     title: "Munroe Island Boating Rates & Timings: Complete 2026 Guide",
-    metaTitle: "Munroe Island Boating Rates & Timings 2026 | Official Price List",
+    metaTitle: "Munroe Island Boating Rates & Timings 2026 | Verified Price List",
     metaDescription:
-      "Official 2026 Munroe Island boating charges and departure schedules. Compare sunrise canoe rates, shikara hire, and kayaking costs without hidden fees.",
+      "Verified 2026 Munroe Island boating charges and departure schedules. Compare sunrise canoe rates, shikara hire, and kayaking costs without hidden fees.",
     publishedDate: "2026-03-10",
     readTime: "5 min read",
     summary:
       "Everything you need to know about boat ride charges in Munroe Island: starting from ₹800 for traditional canoes and ₹1,200 for covered shikaras. Understand departure timings and advance token booking.",
     content: [
       {
-        heading: "Official Boating Rates on Munroe Island",
+        heading: "Standard Boating Rates on Munroe Island",
         body: [
           "Munroe Island boating prices are standardized based on vessel type and duration. Traditional hand-paddled wooden canoes are ₹800 for a 1-hour canal tour and ₹1,200 for the signature 2-hour sunrise or daytime tour (up to 6 passengers for the entire boat).",
           "For larger families or groups requiring shaded seating, covered Shikara cruises start at ₹1,200 for 1 hour and ₹2,000 for 2 hours (up to 9 guests). For 10 to 15 guests, rates are ₹1,400 for 1 hour and ₹2,400 for 2 hours. Guided kayaks are ₹250/hour per person.",
@@ -54,7 +54,7 @@ export const GUIDES: GuideArticle[] = [
       {
         question: "Is bargaining allowed at the jetty?",
         answer:
-          "Official native boatmen maintain standardized platform fares. Booking online ensures transparent rates with zero unexpected surcharges upon arrival.",
+          "Licensed native boatmen maintain standardized platform fares. Booking online ensures transparent rates with zero unexpected surcharges upon arrival.",
       },
       {
         question: "Can we pay by UPI at the boarding pier?",
@@ -328,7 +328,7 @@ export const GUIDES: GuideArticle[] = [
       {
         heading: "Conservation & Responsible Tourism",
         body: [
-          "Kerala's government and environmental organizations are working on mangrove restoration projects along the island's vulnerable banks. Mangrove roots act as natural barriers against tidal erosion. By booking your canoe tour with licensed native boatmen through official platforms, a portion of tourism revenue directly supports local families and conservation awareness.",
+          "Kerala's government and environmental organizations are working on mangrove restoration projects along the island's vulnerable banks. Mangrove roots act as natural barriers against tidal erosion. By booking your canoe tour directly with licensed native boatmen, a portion of tourism revenue directly supports local families and conservation awareness.",
           "As a visitor, you can help by: using local boatmen rather than outside operators, carrying zero single-use plastic, and sharing the island's ecology story on social media to raise awareness about sustainable backwater tourism.",
         ],
       },

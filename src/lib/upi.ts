@@ -1,11 +1,11 @@
 /**
  * Direct Dynamic UPI Protocol & Intent Utilities
- * Generates official NPCI-compliant payment URIs, mobile app intents, and UTR validation.
+ * Generates standard NPCI Universal UPI payment URIs, mobile app intents, and UTR validation.
  */
 
 export interface UpiPaymentDetails {
   upiId: string;
-  merchantName: string;
+  payeeName?: string;
   amount: number;
   bookingNumber: string;
 }
@@ -16,12 +16,12 @@ export interface UpiPaymentDetails {
  */
 export function generateUpiUri({
   upiId,
-  merchantName,
+  payeeName = '',
   amount,
   bookingNumber,
 }: UpiPaymentDetails): string {
   const pa = encodeURIComponent(upiId.trim());
-  const pn = encodeURIComponent(merchantName.trim());
+  const pn = encodeURIComponent((payeeName || '').trim());
   const tn = encodeURIComponent(`Munroe Boat Token ${bookingNumber}`);
   const am = amount.toFixed(2);
 

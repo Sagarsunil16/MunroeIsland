@@ -219,7 +219,7 @@ export function BookingLookupCard() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200">
               <div>
                 <span className="text-[10px] font-black uppercase tracking-[0.25em] text-neutral-400 block mb-1">
-                  OFFICIAL RESERVATION SLIP
+                  CONFIRMED RESERVATION SLIP
                 </span>
                 <div className="flex items-center gap-3">
                   <span className="font-mono text-xl sm:text-2xl font-black text-black tracking-wide">

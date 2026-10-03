@@ -116,7 +116,7 @@ export default function RefundPolicyPage() {
                   100% Guaranteed Refund or Immediate Rescheduling
                 </p>
                 <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
-                  Safety is paramount on the water. If your boat trip is cancelled by our dispatch desk or the captain due to heavy monsoonal storms, extreme squalls, or official coastal weather warnings, you receive a <strong className="text-black">100% complete refund of your advance payment</strong> immediately with zero deductions. Alternatively, you may choose to reschedule to the next safe departure window.
+                  Safety is paramount on the water. If your boat trip is cancelled by our dispatch desk or the captain due to heavy monsoonal storms, extreme squalls, or coastal weather warnings, you receive a <strong className="text-black">100% complete refund of your advance payment</strong> immediately with zero deductions. Alternatively, you may choose to reschedule to the next safe departure window.
                 </p>
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function RefundPolicyPage() {
                   EMAIL SUPPORT
                 </span>
                 <div className="text-base font-black text-black">munroeisland2@gmail.com</div>
-                <div className="text-neutral-500 mt-1">Official customer care & records</div>
+                <div className="text-neutral-500 mt-1">Direct customer care & records</div>
               </div>
             </div>
           </section>

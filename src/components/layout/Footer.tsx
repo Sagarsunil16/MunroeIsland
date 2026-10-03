@@ -114,7 +114,7 @@ export function Footer() {
         <div className="pt-8 border-t border-nature-lagoon flex flex-col sm:flex-row items-center justify-between text-[11px] text-nature-sand/60 gap-4">
           <p>© {new Date().getFullYear()} munroe-island.in • All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <span>Official Eco-Tourism Initiative</span>
+            <span>Native Boatmen Initiative</span>
             <span>•</span>
             <Link href="/contact" className="hover:underline">Contact Dispatch</Link>
           </div>

@@ -8,7 +8,7 @@ import {
 describe("Direct UPI Protocol & Intent Utilities", () => {
   const samplePayment = {
     upiId: "sagarsunil16-2@oksbi",
-    merchantName: "Munroe Island Waterways",
+    payeeName: "Sagar Sunil",
     amount: 300,
     bookingNumber: "MNI-20260929-6049",
   };

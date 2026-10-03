@@ -144,7 +144,7 @@ export function BoatingViewClient({ faqs }: BoatingViewClientProps) {
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
           <span className="gsap-boating-eyebrow text-[11px] font-black uppercase tracking-[0.25em] text-neutral-500 block mb-3">
-            OFFICIAL FARES & SCHEDULES
+            STANDARDIZED FARES & SCHEDULES
           </span>
           <h1 className="gsap-boating-headline text-4xl sm:text-6xl lg:text-7xl font-sans font-black text-black tracking-[-0.03em] leading-[0.98]">
             Boating Charges & Tours

@@ -2,14 +2,14 @@ import { BoatingViewClient } from '@/components/boating/BoatingViewClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Munroe Island Experiences & Boating Tours | Official Fares & Timings',
+  title: 'Munroe Island Experiences & Boating Tours | Standard Fares & Timings',
   description:
     'Explore hand-carved wooden canoe tours (from ₹800), shaded family shikaras (from ₹1,200), and backwater kayaking in Munroe Island. Compare rates and reserve with an upfront token.',
   alternates: {
     canonical: 'https://www.munroe-island.in/experiences',
   },
   openGraph: {
-    title: 'Munroe Island Boating Experiences & Official Fares',
+    title: 'Munroe Island Boating Experiences & Standard Fares',
     description:
       'Compare sunrise canoe rates, shaded family shikaras, and kayaking in Munroe Island backwaters. Transparent token reservation.',
     url: 'https://www.munroe-island.in/experiences',

@@ -7,7 +7,7 @@ import { formatINR } from '@/lib/utils';
 import { AddToCalendarButton } from '@/components/booking/AddToCalendarButton';
 
 export const metadata: Metadata = {
-  title: 'Booking Confirmation | Munroe Island Waterways',
+  title: 'Booking Confirmation | Munroe Island',
   robots: {
     index: false,
     follow: false,

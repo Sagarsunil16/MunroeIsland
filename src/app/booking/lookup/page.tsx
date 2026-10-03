@@ -4,7 +4,7 @@ import { BookingLookupCard } from '@/components/booking/BookingLookupCard';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata = {
-  title: 'Check Booking Status | Munroe Island Waterways',
+  title: 'Check Booking Status | Munroe Island',
   description:
     'Track your Munroe Island boat reservation, check captain assignment status, view jetty meeting directions, and see your balance due.',
   alternates: {

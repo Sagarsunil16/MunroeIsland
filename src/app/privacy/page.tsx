@@ -96,7 +96,7 @@ export default function PrivacyPage() {
             <ul className="space-y-3 text-neutral-600">
               <li className="flex items-start gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-black mt-2 shrink-0" />
-                <p>To issue your official booking reference pass and digital receipt via email.</p>
+                <p>To issue your booking reference pass and digital receipt via email.</p>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-black mt-2 shrink-0" />

@@ -7,11 +7,11 @@ import { GoogleAnalytics } from "@/shared/components/analytics/GoogleAnalytics";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.munroe-island.in"),
   title: {
-    default: "Munroe Island Boating | Official Canoe, Shikara & Kayak Tours Kerala",
-    template: "%s | Munroe Island Boating",
+    default: "Munroe Island | Backwater Canoe, Shikara & Kayak Tours Kerala",
+    template: "%s | Munroe Island",
   },
   description:
-    "Book official Munroe Island boating — hand-paddled sunrise wooden canoe tours from ₹800, shaded family shikara cruises from ₹1,200, and guided kayak expeditions (₹250/hr) through narrow mangrove tunnels. Munroe Island (Munroethuruthu), Kollam, Kerala. Online token booking, transparent charges, licensed native boatmen.",
+    "Book authentic Munroe Island boating — hand-paddled sunrise wooden canoe tours from ₹800, shaded family shikara cruises from ₹1,200, and guided kayak expeditions (₹250/hr) through narrow mangrove tunnels. Munroe Island (Munroethuruthu), Kollam, Kerala. Online token booking, transparent charges, licensed native boatmen.",
   keywords: [
     // Core brand & destination
     "Munroe Island",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     "Best Time to Visit Munroe Island",
     "Munroe Island One Day Trip",
   ],
-  authors: [{ name: "Munroe Island Waterways Expeditions" }],
+  authors: [{ name: "Munroe Island Backwater Tours" }],
   creator: "munroe-island.in",
   alternates: {
     canonical: "/",
@@ -73,11 +73,11 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Munroe Island Boating | Official Canoe, Shikara & Kayak Tours",
+    title: "Munroe Island | Backwater Canoe, Shikara & Kayak Tours",
     description:
       "Silent mangrove canals, authentic hand-paddled wooden canoes, shaded family shikaras, and transparent token advance booking with licensed native boatmen.",
     url: "https://www.munroe-island.in",
-    siteName: "Munroe Island Waterways",
+    siteName: "Munroe Island",
     locale: "en_IN",
     type: "website",
     images: [
@@ -91,7 +91,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Munroe Island Boating | Official Canoe & Shikara Tours Kerala",
+    title: "Munroe Island | Backwater Canoe & Shikara Tours Kerala",
     description:
       "Sunrise wooden canoe tours, shaded family shikaras, and mangrove kayaking in Munroe Island. Transparent rates and instant token reservation.",
     images: ["/images/canoe.jpeg"],
@@ -169,7 +169,7 @@ export default function RootLayout({
                 {
                   "@type": "TravelAgency",
                   "@id": "https://www.munroe-island.in/#agency",
-                  name: "Munroe Island Waterways Expeditions",
+                  name: "Munroe Island Backwater Tours",
                   url: "https://www.munroe-island.in",
                   telephone: "+919061710075",
                   email: "munroeisland2@gmail.com",

@@ -95,7 +95,7 @@ function generateGuestEmailHtml(booking: EmailBookingDetails, siteUrl: string): 
                 <tr>
                   <td>
                     <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: #dfbd7c; margin-bottom: 8px;">
-                      🌿 OFFICIAL WATERWAY EXPEDITION • KERALA
+                      🌿 BACKWATER EXPEDITIONS • KERALA
                     </div>
                     <div style="font-size: 26px; font-weight: 800; color: #ffffff; letter-spacing: -0.02em; line-height: 1.2;">
                       Munroe Island
@@ -237,7 +237,7 @@ function generateGuestEmailHtml(booking: EmailBookingDetails, siteUrl: string): 
 
               <!-- Safety Disclaimer Note -->
               <div style="font-size: 11px; line-height: 1.6; color: #a8a29e; text-align: center; margin-top: 24px; padding-top: 18px; border-top: 1px solid #f5f5f4;">
-                Munroe Island Waterways acts as an authorized booking facilitator under Section 79 of the IT Act, 2000. All water navigation is operated by licensed independent boat captains. Life jackets are mandatory.
+                Munroe Island acts as a booking facilitator under Section 79 of the IT Act, 2000. All water navigation is operated by licensed independent boat captains. Life jackets are mandatory.
               </div>
             </td>
           </tr>
@@ -245,10 +245,10 @@ function generateGuestEmailHtml(booking: EmailBookingDetails, siteUrl: string): 
           <!-- Footer -->
           <tr>
             <td style="background-color: #faf8f5; padding: 24px 36px; text-align: center; font-size: 12px; color: #78716c; border-top: 1px solid #e7e0d6;">
-              <div style="font-weight: 700; color: #07271c; margin-bottom: 4px;">Munroe Island Waterway Expeditions</div>
+              <div style="font-weight: 700; color: #07271c; margin-bottom: 4px;">Munroe Island Backwater Tours</div>
               <div>Munroethuruthu, Kollam District, Kerala, India</div>
               <div style="margin-top: 8px;">
-                <a href="${siteUrl}" style="color: #07271c; text-decoration: underline; font-weight: 600;">Visit Official Portal</a> • 
+                <a href="${siteUrl}" style="color: #07271c; text-decoration: underline; font-weight: 600;">Visit munroe-island.in</a> • 
                 <a href="mailto:munroeisland2@gmail.com" style="color: #07271c; text-decoration: underline; font-weight: 600;">munroeisland2@gmail.com</a>
               </div>
             </td>
@@ -267,7 +267,7 @@ function generateAdminEmailHtml(booking: EmailBookingDetails, siteUrl: string): 
   const adminUrl = `${siteUrl}/admin/bookings`;
   const cleanPhone = booking.customerPhone.replace(/[^0-9]/g, '');
   const customerWhatsAppUrl = `https://wa.me/${cleanPhone.startsWith('91') ? cleanPhone : '91' + cleanPhone}?text=${encodeURIComponent(
-    `Hello ${booking.customerName}! Greetings from Munroe Island Expeditions regarding your booking ${booking.bookingNumber}.`
+    `Hello ${booking.customerName}! Greetings from Munroe Island regarding your booking ${booking.bookingNumber}.`
   )}`;
 
   const safeCustomerName = escapeHtml(booking.customerName);
@@ -422,7 +422,7 @@ export async function sendBookingConfirmationEmails(booking: EmailBookingDetails
   const rawFrom = process.env.SMTP_FROM?.replace(/^["']|["']$/g, '');
   const fromAddress =
     rawFrom ||
-    (smtpUser ? `"Munroe Island Expeditions" <${smtpUser}>` : 'Munroe Island Expeditions <munroeisland2@gmail.com>');
+    (smtpUser ? `"Munroe Island Dispatch" <${smtpUser}>` : 'Munroe Island Dispatch <munroeisland2@gmail.com>');
   const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER;
 
   let guestEmailSent = false;
@@ -498,7 +498,7 @@ function generateContactCustomerEmailHtml(inquiry: ContactInquiryDetails, siteUr
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>We Received Your Inquiry | Munroe Waterways</title>
+  <title>We Received Your Inquiry | Munroe Island</title>
 </head>
 <body style="margin: 0; padding: 0; background-color: #f7f7f7; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #111111;">
   <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding: 32px 16px;">
@@ -557,7 +557,7 @@ function generateContactCustomerEmailHtml(inquiry: ContactInquiryDetails, siteUr
 
           <tr>
             <td style="background-color: #f7f7f7; padding: 20px 32px; text-align: center; font-size: 11px; color: #888888; border-top: 1px solid #eeeeee;">
-              <div>Munroe Island Official Backwater Expeditions</div>
+              <div>Munroe Island Backwater Tours</div>
               <div style="margin-top: 4px;">Munroe Island, Kollam, Kerala • <a href="${siteUrl}" style="color: #555555;">munroe-island.in</a></div>
             </td>
           </tr>
@@ -639,7 +639,7 @@ function generateContactAdminEmailHtml(inquiry: ContactInquiryDetails): string {
                     </a>
                   </td>
                   <td style="padding-left: 8px;">
-                    <a href="https://wa.me/${safePhone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi ${inquiry.name}, thank you for contacting Munroe Waterways regarding ${inquiry.subject}.`)}" style="display: block; text-align: center; background-color: #10b981; color: #ffffff; text-decoration: none; padding: 12px; border-radius: 8px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;">
+                    <a href="https://wa.me/${safePhone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi ${inquiry.name}, thank you for contacting Munroe Island regarding ${inquiry.subject}.`)}" style="display: block; text-align: center; background-color: #10b981; color: #ffffff; text-decoration: none; padding: 12px; border-radius: 8px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;">
                       Chat on WhatsApp
                     </a>
                   </td>
@@ -668,7 +668,7 @@ export async function sendContactInquiryEmails(inquiry: ContactInquiryDetails): 
   const rawFrom = process.env.SMTP_FROM?.replace(/^["']|["']$/g, '');
   const fromAddress =
     rawFrom ||
-    (smtpUser ? `"Munroe Island Expeditions" <${smtpUser}>` : 'Munroe Island Expeditions <munroeisland2@gmail.com>');
+    (smtpUser ? `"Munroe Island Dispatch" <${smtpUser}>` : 'Munroe Island Dispatch <munroeisland2@gmail.com>');
   const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER;
 
   let customerSent = false;
@@ -682,7 +682,7 @@ export async function sendContactInquiryEmails(inquiry: ContactInquiryDetails): 
         await transporter.sendMail({
           from: fromAddress,
           to: inquiry.email,
-          subject: `We received your inquiry: ${inquiry.subject} [Munroe Island Expeditions]`,
+          subject: `We received your inquiry: ${inquiry.subject} [Munroe Island]`,
           html: custHtml,
         });
         customerSent = true;

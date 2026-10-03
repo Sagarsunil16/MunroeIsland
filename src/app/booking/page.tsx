@@ -198,7 +198,7 @@ function BookingFormContent() {
             key: razorpayKey,
             amount: Math.round(quote.tokenAdvance * 100), // paise
             currency: 'INR',
-            name: 'Munroe Island Waterways',
+            name: 'Munroe Island',
             description: `Token Advance: ${quote.experienceTitle}`,
             order_id: data.razorpayOrderId,
             prefill: {
@@ -331,7 +331,7 @@ function BookingFormContent() {
         {/* Header (VisitTheUSA Typography) */}
         <div className="max-w-3xl mb-16 sm:mb-20">
           <span className="gsap-booking-eyebrow text-[11px] font-black uppercase tracking-[0.25em] text-neutral-500 block mb-3">
-            OFFICIAL BACKWATER RESERVATION
+            DIRECT BACKWATER RESERVATION
           </span>
           <h1 className="gsap-booking-headline text-4xl sm:text-6xl lg:text-7xl font-sans font-black text-black tracking-[-0.03em] leading-[0.98]">
             Reserve Your Boat

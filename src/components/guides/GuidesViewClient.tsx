@@ -63,7 +63,7 @@ export function GuidesViewClient({ guides }: GuidesViewClientProps) {
         {/* Header (VisitTheUSA Typography) */}
         <div className="max-w-3xl mb-16 sm:mb-20">
           <span className="gsap-guides-eyebrow text-[11px] font-black uppercase tracking-[0.25em] text-neutral-500 block mb-3">
-            OFFICIAL DESTINATION INTELLIGENCE
+            DESTINATION TRAVEL GUIDES
           </span>
           <h1 className="gsap-guides-headline text-4xl sm:text-6xl lg:text-7xl font-sans font-black text-black tracking-[-0.03em] leading-[0.98]">
             Travel & Boating Guides

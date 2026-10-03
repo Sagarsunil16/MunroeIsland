@@ -21,7 +21,7 @@ export function Navbar() {
               Munroe Island
             </span>
             <span className="text-[10px] uppercase tracking-wider text-nature-gold font-medium">
-              Official Boating & Tours
+              Backwater Boating & Tours
             </span>
           </div>
         </Link>
