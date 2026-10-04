@@ -55,7 +55,7 @@ describe("Direct UPI Protocol & Intent Utilities", () => {
       const iosIntents = generateAppIntentUrls(samplePayment);
       expect(iosIntents.googlePay).toContain("tez://upi/pay?");
       expect(iosIntents.phonePe).toContain("phonepe://upi/pay?");
-      expect(iosIntents.paytm).toContain("paytmmp://pay?");
+      expect(iosIntents.paytm).toContain("paytmmp://upi/pay?");
       expect(iosIntents.bhim).toContain("bhim://pay?");
 
       // Restore navigator

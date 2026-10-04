@@ -43,6 +43,80 @@ interface UpiPaymentModalProps {
   onSuccess: (bookingNumber: string) => void;
 }
 
+function GooglePayIcon() {
+  return (
+    <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+        fill="#4285F4"
+      />
+      <path
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+        fill="#34A853"
+      />
+      <path
+        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+        fill="#FBBC05"
+      />
+      <path
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+        fill="#EA4335"
+      />
+    </svg>
+  );
+}
+
+function PhonePeIcon() {
+  return (
+    <svg className="w-4 h-4 shrink-0 rounded-sm" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <rect width="40" height="40" rx="9" fill="#5F259F" />
+      <path
+        d="M20.2 8.5H14.5v12.2h4.2v-3.8h1.5c4.1 0 6.6-2 6.6-4.2 0-2.2-2.5-4.2-6.6-4.2zm-.1 5.4h-1.4v-2.6h1.4c1.8 0 2.8.7 2.8 1.3 0 .7-1 1.3-2.8 1.3z"
+        fill="#FFFFFF"
+      />
+      <path
+        d="M17.4 19.8l8.2 11.7h5.1L21.9 19.8h-4.5z"
+        fill="#FFFFFF"
+      />
+      <circle cx="28.5" cy="11.5" r="2.2" fill="#FFFFFF" />
+    </svg>
+  );
+}
+
+function PaytmIcon() {
+  return (
+    <svg className="w-4 h-4 shrink-0 rounded-sm" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <rect width="40" height="40" rx="9" fill="#002E6E" />
+      <path
+        d="M8 12.5h3.6c2 0 3.2 1.1 3.2 2.8 0 1.7-1.2 2.8-3.2 2.8h-1.8v3.8H8V12.5zm2.1 3.8h1.2c.7 0 1.2-.4 1.2-1s-.5-1-1.2-1h-1.2v2z"
+        fill="#FFFFFF"
+      />
+      <path
+        d="M16 16.5h2.2v5.4H16z"
+        fill="#00BAF2"
+      />
+      <path
+        d="M19.5 13.5h5.8v1.8h-1.8v6.6h-2.2v-6.6h-1.8V13.5z"
+        fill="#00BAF2"
+      />
+      <path
+        d="M26.5 16.5h2.1v1.1c.5-.8 1.4-1.2 2.3-1.2 1.6 0 2.6.9 2.6 2.5v3h-2.1v-2.6c0-.6-.4-1-.9-1s-1 .4-1 1v2.6h-2.1v-5.4z"
+        fill="#FFFFFF"
+      />
+    </svg>
+  );
+}
+
+function UpiIcon() {
+  return (
+    <svg className="w-4 h-4 shrink-0 rounded-sm" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect width="32" height="32" rx="7" fill="#E4E4E7" />
+      <path d="M7 19.5L14 5L17 11L11 23L7 19.5Z" fill="#097939" />
+      <path d="M13 25.5L16 19.5L22 7.5L19 13.5L13 25.5Z" fill="#ED752E" />
+    </svg>
+  );
+}
+
 export function UpiPaymentModal({
   isOpen,
   onClose,
@@ -416,46 +490,49 @@ export function UpiPaymentModal({
               <div className="grid grid-cols-2 gap-2.5">
                 <a
                   href={intentUrls.googlePay}
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-2xl border border-neutral-200 hover:border-black bg-neutral-50 hover:bg-white transition-all font-bold text-xs text-black shadow-2xs active:scale-98"
+                  className="flex items-center justify-center gap-2.5 p-3.5 rounded-2xl border border-neutral-200 hover:border-black bg-neutral-50 hover:bg-white transition-all font-bold text-xs text-black shadow-2xs active:scale-98"
                 >
-                  <span className="h-2.5 w-2.5 rounded-full bg-blue-500" />
+                  <GooglePayIcon />
                   <span>Google Pay</span>
                 </a>
 
                 <a
                   href={intentUrls.phonePe}
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-2xl border border-neutral-200 hover:border-black bg-neutral-50 hover:bg-white transition-all font-bold text-xs text-black shadow-2xs active:scale-98"
+                  className="flex items-center justify-center gap-2.5 p-3.5 rounded-2xl border border-neutral-200 hover:border-black bg-neutral-50 hover:bg-white transition-all font-bold text-xs text-black shadow-2xs active:scale-98"
                 >
-                  <span className="h-2.5 w-2.5 rounded-full bg-purple-600" />
+                  <PhonePeIcon />
                   <span>PhonePe</span>
                 </a>
 
                 <a
                   href={intentUrls.paytm}
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-2xl border border-neutral-200 hover:border-black bg-neutral-50 hover:bg-white transition-all font-bold text-xs text-black shadow-2xs active:scale-98"
+                  className="flex items-center justify-center gap-2.5 p-3.5 rounded-2xl border border-neutral-200 hover:border-black bg-neutral-50 hover:bg-white transition-all font-bold text-xs text-black shadow-2xs active:scale-98"
                 >
-                  <span className="h-2.5 w-2.5 rounded-full bg-sky-500" />
+                  <PaytmIcon />
                   <span>Paytm</span>
                 </a>
 
                 <a
                   href={intentUrls.universal}
-                  className="flex items-center justify-center gap-2 p-3.5 rounded-2xl border border-neutral-200 hover:border-black bg-neutral-50 hover:bg-white transition-all font-bold text-xs text-black shadow-2xs active:scale-98"
+                  className="flex items-center justify-center gap-2.5 p-3.5 rounded-2xl border border-neutral-200 hover:border-black bg-neutral-50 hover:bg-white transition-all font-bold text-xs text-black shadow-2xs active:scale-98"
                 >
-                  <Smartphone className="h-3.5 w-3.5 text-black" />
+                  <UpiIcon />
                   <span>Any UPI App</span>
                 </a>
               </div>
 
-              <div className="text-center pt-2">
+              <div className="text-center pt-1 space-y-1.5">
                 <button
                   type="button"
                   onClick={handleCopyUpi}
-                  className="text-xs text-neutral-500 hover:text-black underline inline-flex items-center gap-1 font-medium"
+                  className="text-xs text-neutral-600 hover:text-black underline inline-flex items-center gap-1 font-medium"
                 >
                   <Copy className="h-3 w-3" />
                   <span>Or copy UPI ID: {upiId}</span>
                 </button>
+                <p className="text-[10px] text-neutral-400">
+                  Tip: If an app is not installed, switch to <strong>Scan Dynamic QR</strong> above.
+                </p>
               </div>
             </div>
           )}

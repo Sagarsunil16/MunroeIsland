@@ -53,7 +53,7 @@ export function generateAppIntentUrls(details: UpiPaymentDetails) {
     universal: baseUri,
     googlePay: `tez://upi/pay?${upiQuery}`,
     phonePe: `phonepe://upi/pay?${upiQuery}`,
-    paytm: `paytmmp://pay?${upiQuery}`,
+    paytm: `paytmmp://upi/pay?${upiQuery}`,
     bhim: `bhim://pay?${upiQuery}`,
   };
 
