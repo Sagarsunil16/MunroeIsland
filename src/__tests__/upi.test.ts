@@ -43,6 +43,27 @@ describe("Direct UPI Protocol & Intent Utilities", () => {
       expect(intents.paytm).toContain("net.one97.paytm");
       expect(intents.bhim).toContain("in.org.npci.upiapp");
     });
+
+    it("generates dedicated iOS URL schemes when running on iPhone", () => {
+      const originalNavigator = global.navigator;
+      // Mock iPhone userAgent
+      Object.defineProperty(global, "navigator", {
+        value: { userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)" },
+        configurable: true,
+      });
+
+      const iosIntents = generateAppIntentUrls(samplePayment);
+      expect(iosIntents.googlePay).toContain("tez://upi/pay?");
+      expect(iosIntents.phonePe).toContain("phonepe://upi/pay?");
+      expect(iosIntents.paytm).toContain("paytmmp://pay?");
+      expect(iosIntents.bhim).toContain("bhim://pay?");
+
+      // Restore navigator
+      Object.defineProperty(global, "navigator", {
+        value: originalNavigator,
+        configurable: true,
+      });
+    });
   });
 
   describe("12-Digit UTR Reference Validation", () => {

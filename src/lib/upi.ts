@@ -46,18 +46,19 @@ export function generateAppIntentUrls(details: UpiPaymentDetails) {
     bhim: `intent://pay?${upiQuery}#Intent;scheme=upi;package=in.org.npci.upiapp;end`,
   };
 
-  // iOS apps register their own URL schemes. The standard upi:// URI is the
-  // most compatible fallback because ALL NPCI-certified apps on iOS handle it.
+  // iOS app-specific URL schemes.
+  // Using generic upi:// on iOS causes WhatsApp to intercept the link because
+  // WhatsApp Pay registers the upi:// handler in its iOS bundle.
   const iosUrls = {
     universal: baseUri,
-    googlePay: baseUri,   // GPay iOS handles upi:// via its registered handler
-    phonePe: baseUri,     // PhonePe iOS handles upi:// natively
-    paytm: baseUri,       // Paytm iOS handles upi:// natively
-    bhim: baseUri,
+    googlePay: `tez://upi/pay?${upiQuery}`,
+    phonePe: `phonepe://upi/pay?${upiQuery}`,
+    paytm: `paytmmp://pay?${upiQuery}`,
+    bhim: `bhim://pay?${upiQuery}`,
   };
 
-  // Runtime detection — only runs client-side on iOS devices
-  if (typeof window !== "undefined" && typeof navigator !== "undefined") {
+  // Runtime detection — checks for iOS client devices
+  if (typeof navigator !== "undefined" && navigator.userAgent) {
     const isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
     if (isIos) return iosUrls;
   }
