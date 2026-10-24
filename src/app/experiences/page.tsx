@@ -2,16 +2,16 @@ import { BoatingViewClient } from '@/components/boating/BoatingViewClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Munroe Island Experiences & Boating Tours | Standard Fares & Timings',
+  title: 'Munroe Island Experiences | Canoe, Shikara & Kayak Backwater Tours Kerala',
   description:
-    'Explore hand-carved wooden canoe tours (from ₹800), shaded family shikaras (from ₹1,200), and backwater kayaking in Munroe Island. Compare rates and reserve with an upfront token.',
+    'Explore Munroe Island backwater experiences: hand-paddled canoe tours (₹800–₹1,200), covered family shikara cruises (₹1,200–₹2,000), and guided kayaking (₹250/hr). Compare all vessel options, timings, and canal access. Book online with token advance.',
   alternates: {
     canonical: 'https://www.munroe-island.in/experiences',
   },
   openGraph: {
-    title: 'Munroe Island Boating Experiences & Standard Fares',
+    title: 'Munroe Island Backwater Experiences | Canoe, Shikara & Kayak Tours',
     description:
-      'Compare sunrise canoe rates, shaded family shikaras, and kayaking in Munroe Island backwaters. Transparent token reservation.',
+      'Compare all Munroe Island boating experiences: silent wooden canoe through mangrove tunnels, shaded family shikara on Ashtamudi Lake, and adventure kayaking. Transparent pricing, token advance booking.',
     url: 'https://www.munroe-island.in/experiences',
     type: 'website',
   },

@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Book Munroe Island Boating Online | Instant Token Advance Reservation',
+  title: 'Book Munroe Island Boating Online | Token Advance from ₹400',
   description:
-    'Reserve your sunrise wooden canoe, covered family shikara, or backwater kayak tour on Munroe Island with an upfront token advance (e.g. ₹400). Direct licensed native boatman assignment.',
+    'Book Munroe Island boating instantly — canoe from ₹800, shikara from ₹1,200, kayak ₹250/hr. Pay only a ₹400 token advance online, settle balance with boatman at pier. Confirmed booking with licensed native boatman. Munroethuruthu, Kollam.',
   alternates: {
     canonical: 'https://www.munroe-island.in/booking',
   },
   openGraph: {
-    title: 'Book Munroe Island Boating Online | Instant Token Reservation',
+    title: 'Book Munroe Island Boating | Token Advance from ₹400',
     description:
-      'Guaranteed morning sunrise canoe and shaded shikara booking with licensed native boatmen. Pay token advance online, balance at pier.',
+      'Instant online booking for Munroe Island canoe, shikara & kayak tours. Pay ₹400 token advance, balance at pier. Licensed native boatmen. Munroethuruthu, Kollam.',
     url: 'https://www.munroe-island.in/booking',
     type: 'website',
   },

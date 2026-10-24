@@ -18,6 +18,77 @@ export interface GuideArticle {
 
 export const GUIDES: GuideArticle[] = [
   {
+    slug: "munroe-island-kayaking-price-guide",
+    title: "Munroe Island Kayaking Price, Routes & Booking Guide 2026",
+    metaTitle: "Munroe Island Kayaking Price 2026 | ₹250/hr Backwater Kayak Guide",
+    metaDescription:
+      "Munroe Island kayaking price is ₹250 per person per hour. Full guide to kayak routes through mangrove tunnels, what's included, best time, and how to book your Munroe Island kayak tour online.",
+    publishedDate: "2026-10-20",
+    readTime: "5 min read",
+    summary:
+      "Everything about kayaking in Munroe Island: ₹250/hr per person pricing, mangrove canal routes, safety gear, and how to book a guided backwater kayak expedition in Munroethuruthu, Kollam.",
+    content: [
+      {
+        heading: "Munroe Island Kayaking Price: What You Pay",
+        body: [
+          "Kayaking in Munroe Island is priced at ₹250 per person per hour — the most affordable and adventurous way to explore the backwaters. For a 2-hour guided kayak expedition through the narrow mangrove canals, you pay ₹500 per person. For solo kayakers who want a half-day (3 hours) experience, the cost is ₹750 per person.",
+          "Kayaks can accommodate 1–2 paddlers per craft. A certified native guide accompanies all kayak sessions on a separate craft, narrating local ecology and wildlife in English or Malayalam. Life jackets, dry bags, and paddle training are included in the price.",
+        ],
+      },
+      {
+        heading: "Why Kayaking Is the Best Way to Explore Munroe Island Canals",
+        body: [
+          "Of all the vessels available on Munroe Island — canoe, shikara, or kayak — the kayak offers the most immersive experience. Sitting just centimetres above the water surface, paddling yourself through the mangrove arches, you feel every gentle current and hear every bird call without engine noise.",
+          "Unlike shikaras, kayaks can navigate the absolute narrowest creeks where even wooden canoes struggle to turn. Remote side-channels that see no other tourist traffic open up exclusively to kayakers, revealing pristine prawn-farming ponds, toddy-palm groves, and fishing villages untouched by mainstream tourism.",
+        ],
+      },
+      {
+        heading: "Munroe Island Kayaking Routes",
+        body: [
+          "1-Hour Mangrove Loop (₹250/person): Paddle through the famous low-arch mangrove tunnel, under two concrete footbridges (duck required!), and return through the main backwater channel. Perfect for first-time kayakers.",
+          "2-Hour Sunrise Canal Expedition (₹500/person): The signature kayaking route. Launch at 5:45 AM, paddle through the green mangrove arches as dawn light filters through the canopy, reach the confluence of Ashtamudi Lake and the Kallada River, then loop back through the shaded side-channels. Kingfishers, cormorants, and white-bellied sea eagles are common.",
+          "3-Hour Full-Island Circumnavigation (₹750/person): For experienced paddlers. Circles the outer perimeter of the island archipelago, crossing into open Ashtamudi Lake waters and returning via the narrow interior canal network. The guide handles navigation so you can focus on paddling and photography.",
+        ],
+      },
+      {
+        heading: "What to Bring for a Kayak Tour",
+        body: [
+          "Quick-dry clothing (you will get slightly wet from paddle splash), sunscreen (SPF 50+), a waterproof phone pouch or action camera, sunglasses with retainer strap, insect repellent, and a water bottle. A light snack is recommended for the 3-hour route.",
+          "Avoid wearing cotton clothes as they stay wet and heavy. Synthetic athletic wear or light linen dries quickly. Closed-toe water shoes or sandals with ankle straps are ideal — flip-flops may fall off.",
+        ],
+      },
+      {
+        heading: "How to Book a Kayak Tour in Munroe Island",
+        body: [
+          "Book online through our token advance system: select 'Guided Kayak Expedition', choose your date and departure time, and pay a ₹200 token advance per person online. The remaining balance (₹50 for 1-hour, ₹300 for 2-hour, ₹550 for 3-hour) is settled at the pier before departure.",
+          "Advance booking is strongly recommended for the sunrise slot (5:45 AM) as kayak berths are limited. During peak season (November–February), sunrise kayak slots fill 3–5 days in advance.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: "What is the Munroe Island kayaking price per person?",
+        answer:
+          "Munroe Island kayaking is priced at ₹250 per person per hour. A 1-hour guided kayak tour costs ₹250/person, a 2-hour sunrise expedition costs ₹500/person, and a 3-hour full-island circumnavigation costs ₹750/person. Life jackets, dry bags, and a certified guide are included.",
+      },
+      {
+        question: "Is kayaking in Munroe Island safe for beginners?",
+        answer:
+          "Yes. Our kayaks are stable sit-on-top models designed for calm backwater conditions, not whitewater rivers. A certified native guide accompanies every session and provides a 10-minute paddle technique briefing before departure. Life jackets are mandatory for all participants. Children above 8 years old can kayak with a parent in a tandem kayak.",
+      },
+      {
+        question: "Can I kayak through the mangrove arch?",
+        answer:
+          "Yes — in fact the kayak is the best vessel for the mangrove arch experience. Because you sit so close to the water surface and control your own speed, you can pause directly beneath the arch canopy, feel the roots brush overhead, and capture the best photographs. The guide will time your approach for the best light.",
+      },
+      {
+        question: "How is kayaking different from a canoe ride in Munroe Island?",
+        answer:
+          "In a canoe, your native boatman paddles while you sit and relax. In a kayak, you do the paddling yourself (with the guide accompanying you). Kayaking is more physically engaging and gives you deeper access to narrow creeks. The canoe is better for couples or groups who want to be paddled through the scenery; the kayak is for active travelers who want to explore independently.",
+      },
+    ],
+  },
+  {
     slug: "munroe-island-boating-rates-timings",
     title: "Munroe Island Boating Rates & Timings: Complete 2026 Guide",
     metaTitle: "Munroe Island Boating Rates & Timings 2026 | Verified Price List",

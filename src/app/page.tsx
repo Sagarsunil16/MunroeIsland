@@ -6,16 +6,16 @@ import { VisitTheUSAExperiences } from '@/components/home/VisitTheUSAExperiences
 import { ArrowRight, Compass, ShieldCheck } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Munroe Island | Backwater Canoe Tours, Shikara & Kayaking Kerala',
+  title: 'Munroe Island Boating | Sunrise Canoe, Shikara & Kayak Tours from ₹800',
   description:
-    'Experience sunrise wooden canoe tours (from ₹800) and shaded family shikara cruises (from ₹1,200) through narrow mangrove tunnels in Munroe Island (Munroethuruthu), Kollam. Advance token booking.',
+    'Book Munroe Island boating online. Sunrise canoe tours from ₹800, family shikara cruises from ₹1,200, kayaking ₹250/hr. Open 5:30 AM–6:30 PM daily. Munroethuruthu, Kollam Kerala — authentic backwater experience, instant token booking.',
   alternates: {
     canonical: 'https://www.munroe-island.in',
   },
   openGraph: {
-    title: 'Munroe Island | Sunrise Canoe & Shikara Tours',
+    title: 'Munroe Island Boating | Canoe, Shikara & Kayak from ₹800',
     description:
-      'Silent mangrove canals, authentic wooden canoes, and transparent token advance booking with licensed native boatmen on Munroe Island.',
+      'Sunrise canoe ₹800, shikara ₹1,200, kayaking ₹250/hr. Open daily 5:30 AM–6:30 PM. Book online with token advance — Munroethuruthu, Kollam, Kerala.',
     url: 'https://www.munroe-island.in',
     type: 'website',
   },
@@ -54,19 +54,23 @@ const FaqAccordion = dynamic(() =>
 const munroeIslandFaqs = [
   {
     q: 'Where is Munroe Island (Munroethuruthu)?',
-    a: 'Munroe Island is an archipelago of eight islands located in Kollam district, Kerala, situated at the unique confluence of Ashtamudi Lake and the Kallada River.',
+    a: 'Munroe Island is an archipelago of eight islands located in Kollam district, Kerala, situated at the unique confluence of Ashtamudi Lake and the Kallada River. It is 25 km from Kollam city and 45 km from Varkala.',
+  },
+  {
+    q: 'What are Munroe Island boating timings and opening hours?',
+    a: 'Munroe Island boating operates daily from 5:30 AM to 6:30 PM, 365 days a year. Sunrise rides depart 5:45 AM–6:30 AM, morning rides from 9:00 AM–11:30 AM, afternoon rides from 2:00 PM–4:00 PM, and sunset rides from 4:30 PM–6:30 PM. The island itself is open for visitors all year round.',
+  },
+  {
+    q: 'What are Munroe Island boating charges?',
+    a: 'Hand-paddled wooden canoes start at ₹800 for a 1-hour tour and ₹1,200 for 2 hours (up to 6 passengers for the entire boat). Covered family shikaras start at ₹1,200 for 1 hour and ₹2,000 for 2 hours (up to 9 guests). Guided kayaks are ₹250/hour per person. Mundrothuruth boating prices are transparent with zero hidden charges.',
+  },
+  {
+    q: 'What is the weather like in Munroe Island and the best time to visit?',
+    a: 'October to February is the peak season with pleasant 24°C–30°C weather, calm backwaters, and migratory birds. March to May is quieter and budget-friendly (early morning sunrise rides remain cool). June to September is monsoon season — the island turns lush emerald green and canoe tours continue during rain breaks. Advance booking is recommended year-round.',
   },
   {
     q: 'Can houseboats navigate inside the narrow canals of Munroe Island?',
     a: 'No. Houseboats are too wide and tall to fit under the low concrete footbridges and narrow mangrove canopies. To explore the famous interior green tunnels, you must travel by wooden Canoe or Kayak.',
-  },
-  {
-    q: 'What are Munroe Island boating charges?',
-    a: 'Hand-paddled wooden canoes start at ₹800 for a 1-hour tour and ₹1,200 for 2 hours (up to 6 passengers for the entire boat). Covered family shikaras start at ₹1,200 for 1 hour and ₹2,000 for 2 hours (up to 9 guests). Guided kayaks are ₹250/hour per person.',
-  },
-  {
-    q: 'What is the best time for boating in Munroe Island?',
-    a: 'The early morning Sunrise tour (5:45 AM – 8:15 AM) is by far the most magical window. The temperature is cool, the water is glassy calm, and birdlife is most active. Sunset rides (4:30 PM – 6:30 PM) over Ashtamudi Lake are also breathtaking.',
   },
   {
     q: 'How does the online token booking system work?',
@@ -74,11 +78,27 @@ const munroeIslandFaqs = [
   },
   {
     q: 'How do I reach Munroe Island from Kollam or Varkala?',
-    a: 'By train, get off at Munroturuttu (MQO) station — only 20 minutes from Kollam Junction. Your assigned boarding pier is a quick 5-minute auto ride. By road, it is 25 km from Kollam and 45 km from Varkala Cliff (approx. 1 hour 20 minutes).',
+    a: 'By train, get off at Munroturuttu (MQO) station — only 20 minutes from Kollam Junction. Your assigned boarding pier is a quick 5-minute auto ride. By road, it is 25 km from Kollam and 45 km from Varkala Cliff (approx. 1 hour 20 minutes). Passenger ferries from Kollam DTPC jetty also reach Munroe Island in ~2.5 hours.',
+  },
+  {
+    q: 'Is Munroe Island better than Alleppey?',
+    a: 'They offer different experiences. Munroe Island is best for intimate, silent hand-paddled canoe rides through narrow mangrove tunnels — far fewer tourists, budget-friendly (from ₹800), and perfect for photographers, couples, and solo travelers. Alleppey is famous for luxury overnight houseboats on wide open lakes. Many travelers do both: sunrise canoe at Munroe Island, then an overnight houseboat in Alleppey.',
   },
 ];
 
 const planningGuides = [
+  {
+    href: '/guides/munroe-island-kayaking-price-guide',
+    title: 'Munroe Island Kayaking Price Guide',
+    tag: 'KAYAK GUIDE',
+    description: '₹250/hr per person — routes through mangrove tunnels, what\'s included, and how to book your kayak slot.',
+  },
+  {
+    href: '/guides/munroe-island-boating-rates-timings',
+    title: 'Boating Rates & Timings 2026',
+    tag: 'PRICE GUIDE',
+    description: 'Full price list: canoe ₹800, shikara ₹1,200, kayak ₹250/hr. Daily departure schedules and token advance tips.',
+  },
   {
     href: '/guides/how-to-reach-munroe-island-kollam-varkala',
     title: 'How to Reach Munroe Island',

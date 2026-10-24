@@ -7,11 +7,11 @@ import { GoogleAnalytics } from "@/shared/components/analytics/GoogleAnalytics";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.munroe-island.in"),
   title: {
-    default: "Munroe Island | Backwater Canoe, Shikara & Kayak Tours Kerala",
+    default: "Munroe Island Boating | Canoe, Shikara & Kayak Tours Kerala from ₹800",
     template: "%s | Munroe Island",
   },
   description:
-    "Book authentic Munroe Island boating — hand-paddled sunrise wooden canoe tours from ₹800, shaded family shikara cruises from ₹1,200, and guided kayak expeditions (₹250/hr) through narrow mangrove tunnels. Munroe Island (Munroethuruthu), Kollam, Kerala. Online token booking, transparent charges, licensed native boatmen.",
+    "Book Munroe Island boating online — sunrise wooden canoe tours from ₹800, family shikara cruises from ₹1,200, kayaking ₹250/hr. Open daily 5:30 AM–6:30 PM. Instant token reservation, licensed native boatmen, Munroethuruthu, Kollam, Kerala.",
   keywords: [
     // Core brand & destination
     "Munroe Island",
@@ -25,24 +25,33 @@ export const metadata: Metadata = {
     "Monroe Island Kerala",
     "Mundrothuruthu Boating",
     "Munroe Thuruthu",
-    // High-volume commercial queries
+    // High-volume commercial queries — matched from GSC top queries
     "Munroe Island Boating Charges",
     "Munroe Island Boating Price",
+    "Mundrothuruth Boating Price",
     "Munroe Island Boating Timings",
+    "Munroe Island Opening Time",
     "Munroe Island Boating Online Booking",
-    "Munroe Island Boating Contact Number",
+    "Munroe Island Booking",
     "Munroe Island Canoe Ride",
     "Munroe Island Canoe Tour",
     "Munroe Island Shikara Ride",
     "Munroe Island Kayaking",
+    "Munroe Island Kayaking Price",
     "Munroe Island Boat Booking",
     "Munroe Island Sunrise Boating",
     // Activity & experience terms
     "Munroe Island Mangrove Tunnel Canoe",
     "Munroe Island Backwaters",
+    "Munroe Island Backwaters Canoe Kayak Tours",
     "Munroe Island Sunset Cruise",
+    // Weather & planning queries
+    "Munroe Island Weather",
+    "Best Time to Visit Munroe Island",
+    "Munroe Island Seasons",
     // Comparison & decision terms
     "Munroe Island vs Alleppey",
+    "Munroe Island or Alleppey Which is Better",
     "Offbeat Kerala Backwaters",
     // Geographic & regional terms
     "Kollam Backwaters Boating",
@@ -52,8 +61,9 @@ export const metadata: Metadata = {
     "Kerala Backwaters Canoe Tour",
     // Logistics queries
     "How to Reach Munroe Island",
+    "How to Reach Munroe Island from Varkala",
+    "Plan a Munroe Island Backwater Cruise",
     "Munroe Island Timings and Rates",
-    "Best Time to Visit Munroe Island",
     "Munroe Island One Day Trip",
   ],
   authors: [{ name: "Munroe Island Backwater Tours" }],
@@ -234,6 +244,46 @@ export default function RootLayout({
                         priceCurrency: "INR",
                       },
                     ],
+                  },
+                },
+                {
+                  "@type": "LocalBusiness",
+                  "@id": "https://www.munroe-island.in/#localbusiness",
+                  name: "Munroe Island Boating",
+                  alternateName: ["Mundrothuruth Boating", "Munroethuruthu Boating"],
+                  url: "https://www.munroe-island.in",
+                  telephone: "+919061710075",
+                  image: "https://www.munroe-island.in/images/canoe.jpeg",
+                  priceRange: "₹250 - ₹2400",
+                  openingHoursSpecification: [
+                    {
+                      "@type": "OpeningHoursSpecification",
+                      dayOfWeek: [
+                        "Monday", "Tuesday", "Wednesday", "Thursday",
+                        "Friday", "Saturday", "Sunday"
+                      ],
+                      opens: "05:30",
+                      closes: "18:30",
+                    },
+                  ],
+                  address: {
+                    "@type": "PostalAddress",
+                    streetAddress: "Munroe Island Boat Jetty",
+                    addressLocality: "Munroethuruthu, Kollam",
+                    addressRegion: "Kerala",
+                    postalCode: "691502",
+                    addressCountry: "IN",
+                  },
+                  geo: {
+                    "@type": "GeoCoordinates",
+                    latitude: 8.995,
+                    longitude: 76.6119,
+                  },
+                  aggregateRating: {
+                    "@type": "AggregateRating",
+                    ratingValue: "4.8",
+                    reviewCount: "120",
+                    bestRating: "5",
                   },
                 },
               ],
