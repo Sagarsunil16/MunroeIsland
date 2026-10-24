@@ -7,7 +7,15 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin/", "/api/"],
+      disallow: [
+        "/admin/",
+        "/api/",
+        // Block parameterized booking page variants — prevents ?exp= query
+        // strings from being indexed as duplicate pages in Google Search Console
+        "/booking?",
+        "/booking/confirmation/",
+        "/booking/lookup",
+      ],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
   };

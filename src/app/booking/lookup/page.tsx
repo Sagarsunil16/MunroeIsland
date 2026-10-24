@@ -10,6 +10,10 @@ export const metadata = {
   alternates: {
     canonical: 'https://www.munroe-island.in/booking/lookup',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function BookingLookupPage() {
